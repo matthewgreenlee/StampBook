@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.goldenpond.stampbook">
+	<class name="StampItem" table="STAMP_ITEM">
+		<id name="id" column="ID">
+			<generator class="native"></generator>
+		</id>
+		<property name="issueNumber" column="ISSUE_NUMBER" type="string"></property>
+		<property name="name" column="NAME" type="string"></property>
+		<property name="issueDate" column="ISSUE_DATE" type="date"></property>
+		<property name="designedBy" column="DESIGNED_BY" type="string"></property>
+		<property name="printedBy" column="PRINTED_BY" type="string"></property>
+	</class>
+</hibernate-mapping>
