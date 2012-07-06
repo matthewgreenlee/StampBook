@@ -1,6 +1,6 @@
 package com.goldenpond.stampbook;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,38 +8,44 @@ import org.junit.Test;
 
 public class StampItemDaoTest {
 
-	private StampItemDao dao;
-	private StampItem item;
+	private StampItemDao dao = new StampItemDao();;
+	private StampItem item = new StampItem();
 
 	@Before
 	public void setUp() {
-		dao = new StampItemDao();
 		dao.connect();
-		item = new StampItem();
 	}
 
 	@Test
 	public void testCreate() {
-		item.setIssueNumber("3");
-		item.setName("name");
+		item.setIssueNumber("2012-03");
+		item.setName("a stamp");
+//		item.setIssueDate(new Date());
+		item.setDesignedBy("a designer");
+		item.setPrintedBy("a printer");
 		dao.create(item);
 	}
+
 	@Test
 	public void testFetch() {
-		StampItem result = dao.fetch("3");
-		assertEquals("3", result.getIssueNumber());
+		StampItem result = dao.fetch("2012-03");
+		assertEquals("2012-03", result.getIssueNumber());
+		assertEquals("a stamp", result.getName());
+		assertEquals("a designer", result.getDesignedBy());
+		assertEquals("a printer", result.getPrintedBy());
 	}
 
 	@Test
 	public void testUpdate() {
-		item.setIssueNumber("2");
-		item.setName("what ever");
+		item.setIssueNumber("2012-03");
+		item.setDesignedBy("another designer");
+		item.setPrintedBy("another printer");
 		dao.update(item);
 	}
 
 	@Test
 	public void testDelete() {
-		item.setIssueNumber("3");
+		item.setIssueNumber("2012-03");
 		dao.delete(item);
 	}
 

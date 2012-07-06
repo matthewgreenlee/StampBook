@@ -7,8 +7,9 @@ public class StampItemDao extends Dao{
 
 	public void create(StampItem item) {
 		String sql = "insert into STAMP_ITEM(ISSUE_NUMBER, NAME, ISSUE_DATE, DESIGNED_BY, PRINTED_BY) " +
-				"VALUES (" + item.getIssueNumber() + ", " + item.getName() + ", " + item.getIssueDate() + ", " + item.getDesignedBy() + ", " + item.getPrintedBy() + ")";
+				"values ('" + item.getIssueNumber() + "', '" + item.getName() + "', " + item.getIssueDate() + ", '" + item.getDesignedBy() + "', '" + item.getPrintedBy() + "')";
 		int rowCnt = executeUpdate(sql);
+		System.out.println(rowCnt + " row(s) were created");
 	}
 
 	public StampItem fetch(String issueNumber) {

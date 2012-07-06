@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class StampItem {
 
+	private long id;
+
 	private String issueNumber;
 
 	private String name;
@@ -13,6 +15,14 @@ public class StampItem {
 	private String designedBy;
 
 	private String printedBy;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getIssueNumber() {
 		return issueNumber;
