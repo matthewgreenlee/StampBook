@@ -10,14 +10,13 @@ import com.goldenpond.stampbook.StampItem;
 
 public class StampItemDaoTest extends TestCase {
 
-	private StampItemDao dao;
-	private StampItem item;
-	private static final int stampItemId = 22;
+	private StampItemDao dao = new StampItemDao();
+	private StampItem item = new StampItem();
+	private static final int ID = 32;
 
 	@Before
-	public void setUp() {
-		dao = new StampItemDao();
-		item = new StampItem();
+	protected void setUp() {
+
 	}
 
 	@Test
@@ -31,9 +30,9 @@ public class StampItemDaoTest extends TestCase {
 
 	@Test
 	public void testFetch() {
-		item.setId(stampItemId);
+		item.setId(ID);
 		StampItem fetched = dao.fetch(item);
-		assertEquals(stampItemId, fetched.getId());
+		assertEquals(ID, fetched.getId());
 		assertEquals("2012-04", fetched.getIssueNumber());
 		assertEquals("a designer", fetched.getDesignedBy());
 		assertEquals("a printer", fetched.getPrintedBy());
@@ -41,7 +40,7 @@ public class StampItemDaoTest extends TestCase {
 
 	@Test
 	public void testUpdate() {
-		item.setId(stampItemId);
+		item.setId(ID);
 		item.setIssueNumber("stampItemId12-05");
 		item.setName("a name");
 		item.setDesignedBy("another designer");
@@ -51,12 +50,12 @@ public class StampItemDaoTest extends TestCase {
 
 	@Test
 	public void testDelete() {
-		item.setId(stampItemId);
+		item.setId(ID);
 		dao.delete(item);
 	}
 
 	@After
-	public void tearDown() {
+	protected void tearDown() {
 
 	}
 }
