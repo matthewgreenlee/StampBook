@@ -18,10 +18,4 @@ public class HibernateUtil {
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-
-	public static void main(String[] args) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		System.out.println("get hibernate session factory done");
-		sf.close();
-	}
 }

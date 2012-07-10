@@ -1,6 +1,6 @@
 package com.goldenpond.stampbook.hibernate;
 
-import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,14 +8,16 @@ import org.junit.Test;
 
 import com.goldenpond.stampbook.StampItem;
 
-public class StampItemDaoTest {
+public class StampItemDaoTest extends TestCase {
 
-	private StampItemDao dao = new StampItemDao();
-	private StampItem item = new StampItem();
+	private StampItemDao dao;
+	private StampItem item;
+	private static final int stampItemId = 22;
 
 	@Before
 	public void setUp() {
-
+		dao = new StampItemDao();
+		item = new StampItem();
 	}
 
 	@Test
@@ -29,9 +31,9 @@ public class StampItemDaoTest {
 
 	@Test
 	public void testFetch() {
-		item.setId(18);
+		item.setId(stampItemId);
 		StampItem fetched = dao.fetch(item);
-		assertEquals(18, fetched.getId());
+		assertEquals(stampItemId, fetched.getId());
 		assertEquals("2012-04", fetched.getIssueNumber());
 		assertEquals("a designer", fetched.getDesignedBy());
 		assertEquals("a printer", fetched.getPrintedBy());
@@ -39,8 +41,8 @@ public class StampItemDaoTest {
 
 	@Test
 	public void testUpdate() {
-		item.setId(18);
-		item.setIssueNumber("2012-05");
+		item.setId(stampItemId);
+		item.setIssueNumber("stampItemId12-05");
 		item.setName("a name");
 		item.setDesignedBy("another designer");
 		item.setPrintedBy("another printer");
@@ -49,12 +51,12 @@ public class StampItemDaoTest {
 
 	@Test
 	public void testDelete() {
-		item.setId(18);
+		item.setId(stampItemId);
 		dao.delete(item);
 	}
 
 	@After
 	public void tearDown() {
-		
+
 	}
 }

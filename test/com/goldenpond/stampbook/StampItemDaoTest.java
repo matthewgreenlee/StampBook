@@ -1,12 +1,12 @@
 package com.goldenpond.stampbook;
 
-import static org.junit.Assert.assertEquals;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StampItemDaoTest {
+public class StampItemDaoTest extends TestCase {
 
 	private StampItemDao dao = new StampItemDao();;
 	private StampItem item = new StampItem();
