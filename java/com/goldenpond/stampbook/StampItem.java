@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "STAMP_ITEM")
+@Table(name = "STAMP")
 public class StampItem {
 
 	private long id;
