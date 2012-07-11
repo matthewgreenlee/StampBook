@@ -1,5 +1,7 @@
 package com.goldenpond.stampbook.hibernate;
 
+import java.util.Date;
+
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -12,7 +14,7 @@ public class StampItemDaoTest extends TestCase {
 
 	private StampItemDao dao = new StampItemDao();
 	private StampItem item = new StampItem();
-	private static final int ID = 32;
+	private static final int ID = 34;
 
 	@Before
 	protected void setUp() {
@@ -23,6 +25,7 @@ public class StampItemDaoTest extends TestCase {
 	public void testCreate() {
 		item.setIssueNumber("2012-04");
 		item.setName("a name");
+		item.setIssueDate(new Date());
 		item.setDesignedBy("a designer");
 		item.setPrintedBy("a printer");
 		dao.create(item);

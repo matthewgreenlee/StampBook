@@ -19,6 +19,17 @@ public class StampItemDao {
 		session.close();
 	}
 
+	public StampItem create(String issueNumber) {
+		Session session = sessionFactory.openSession();
+		StampItem item = new StampItem();
+		item.setIssueNumber(issueNumber);
+		Transaction tx = session.beginTransaction();
+		session.persist(item);
+		tx.commit();
+		session.close();
+		return item;
+	}
+
 	public StampItem fetch(StampItem item) {
 		Session session = sessionFactory.openSession();
 		StampItem selected = new StampItem();
