@@ -27,6 +27,7 @@ public class Stamp {
 	private String printedBy;
 
 	@Id
+	@Column(name = "STAMP_ID")
 	@GeneratedValue(generator="native")
 	@GenericGenerator(name="native", strategy = "native")
 	public long getId() {
