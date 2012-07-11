@@ -5,13 +5,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.goldenpond.stampbook.HibernateUtil;
-import com.goldenpond.stampbook.StampItem;
+import com.goldenpond.stampbook.Stamp;
 
-public class StampItemDao {
+public class StampDao {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	public void create(StampItem item) {
+	public void create(Stamp item) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(item);
@@ -19,9 +19,9 @@ public class StampItemDao {
 		session.close();
 	}
 
-	public StampItem create(String issueNumber) {
+	public Stamp create(String issueNumber) {
 		Session session = sessionFactory.openSession();
-		StampItem item = new StampItem();
+		Stamp item = new Stamp();
 		item.setIssueNumber(issueNumber);
 		Transaction tx = session.beginTransaction();
 		session.persist(item);
@@ -30,9 +30,9 @@ public class StampItemDao {
 		return item;
 	}
 
-	public StampItem fetch(StampItem item) {
+	public Stamp fetch(Stamp item) {
 		Session session = sessionFactory.openSession();
-		StampItem selected = new StampItem();
+		Stamp selected = new Stamp();
 		Transaction transaction = session.beginTransaction();
 		session.load(selected, item.getId());
 		transaction.commit();
@@ -40,7 +40,7 @@ public class StampItemDao {
 		return selected;
 	}
 
-	public void update(StampItem item) {
+	public void update(Stamp item) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.update(item);
@@ -48,7 +48,7 @@ public class StampItemDao {
 		session.close();
 	}
 
-	public void delete(StampItem item) {
+	public void delete(Stamp item) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(item);

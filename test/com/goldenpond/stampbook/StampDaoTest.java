@@ -6,10 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StampItemDaoTest extends TestCase {
+public class StampDaoTest extends TestCase {
 
-	private StampItemDao dao = new StampItemDao();;
-	private StampItem item = new StampItem();
+	private StampDao dao = new StampDao();;
+	private Stamp item = new Stamp();
 
 	@Before
 	public void setUp() {
@@ -28,7 +28,7 @@ public class StampItemDaoTest extends TestCase {
 
 	@Test
 	public void testFetch() {
-		StampItem result = dao.fetch("2012-03");
+		Stamp result = dao.fetch("2012-03");
 		assertEquals("2012-03", result.getIssueNumber());
 		assertEquals("a stamp", result.getName());
 		assertEquals("a designer", result.getDesignedBy());

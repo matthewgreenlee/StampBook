@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "STAMP")
-public class StampItem {
+public class Stamp {
 
 	private long id;
 

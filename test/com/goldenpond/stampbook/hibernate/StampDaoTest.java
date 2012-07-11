@@ -8,13 +8,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.goldenpond.stampbook.StampItem;
+import com.goldenpond.stampbook.Stamp;
 
-public class StampItemDaoTest extends TestCase {
+public class StampDaoTest extends TestCase {
 
-	private StampItemDao dao = new StampItemDao();
-	private StampItem item = new StampItem();
-	private static final int ID = 34;
+	private StampDao dao = new StampDao();
+	private Stamp item = new Stamp();
+	private static final int ID = 35;
 
 	@Before
 	protected void setUp() {
@@ -34,7 +34,7 @@ public class StampItemDaoTest extends TestCase {
 	@Test
 	public void testFetch() {
 		item.setId(ID);
-		StampItem fetched = dao.fetch(item);
+		Stamp fetched = dao.fetch(item);
 		assertEquals(ID, fetched.getId());
 		assertEquals("2012-04", fetched.getIssueNumber());
 		assertEquals("a designer", fetched.getDesignedBy());
