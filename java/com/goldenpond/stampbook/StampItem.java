@@ -2,6 +2,16 @@ package com.goldenpond.stampbook;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "STAMP_ITEM")
 public class StampItem {
 
 	private long id;
@@ -16,6 +26,9 @@ public class StampItem {
 
 	private String printedBy;
 
+	@Id
+	@GeneratedValue(generator="native")
+	@GenericGenerator(name="native", strategy = "native")
 	public long getId() {
 		return id;
 	}
@@ -24,6 +37,7 @@ public class StampItem {
 		this.id = id;
 	}
 
+	@Column(name = "ISSUE_NUMBER")
 	public String getIssueNumber() {
 		return issueNumber;
 	}
@@ -32,6 +46,7 @@ public class StampItem {
 		this.issueNumber = issueNumber;
 	}
 
+	@Column(name = "NAME")
 	public String getName() {
 		return name;
 	}
@@ -40,6 +55,7 @@ public class StampItem {
 		this.name = name;
 	}
 
+	@Column(name = "ISSUE_DATE")
 	public Date getIssueDate() {
 		return issueDate;
 	}
@@ -48,6 +64,7 @@ public class StampItem {
 		this.issueDate = issueDate;
 	}
 
+	@Column(name = "DESIGNED_BY")
 	public String getDesignedBy() {
 		return designedBy;
 	}
@@ -56,6 +73,7 @@ public class StampItem {
 		this.designedBy = designedBy;
 	}
 
+	@Column(name = "PRINTED_BY")
 	public String getPrintedBy() {
 		return printedBy;
 	}
