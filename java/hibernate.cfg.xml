@@ -34,6 +34,7 @@
         <mapping resource="com/goldenpond/stampbook/Stamp.hbm.xml"/>
  -->
  		<mapping class="com.goldenpond.stampbook.Stamp"/>
+ 		<mapping class="com.goldenpond.stampbook.StampItem"/>
     </session-factory>
 
 </hibernate-configuration>

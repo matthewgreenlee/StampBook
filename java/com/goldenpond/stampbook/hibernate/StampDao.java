@@ -1,5 +1,6 @@
 package com.goldenpond.stampbook.hibernate;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,47 +12,56 @@ public class StampDao {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	public void create(Stamp item) {
+	public void create(Stamp stamp) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		session.save(item);
+		session.save(stamp);
 		transaction.commit();
 		session.close();
 	}
 
-	public Stamp create(String issueNumber) {
+	public Stamp create(String issueNumber, String name) {
+
+		Stamp stamp = new Stamp();
+		stamp.setIssueNumber(issueNumber);
+		stamp.setName(name);
+
 		Session session = sessionFactory.openSession();
-		Stamp item = new Stamp();
-		item.setIssueNumber(issueNumber);
-		Transaction tx = session.beginTransaction();
-		session.persist(item);
-		tx.commit();
-		session.close();
-		return item;
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.persist(stamp);
+			tx.commit();
+		} catch (HibernateException he) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+		return stamp;
 	}
 
-	public Stamp fetch(Stamp item) {
+	public Stamp fetch(Stamp stamp) {
 		Session session = sessionFactory.openSession();
 		Stamp selected = new Stamp();
 		Transaction transaction = session.beginTransaction();
-		session.load(selected, item.getId());
+		session.load(selected, stamp.getId());
 		transaction.commit();
 		session.close();
 		return selected;
 	}
 
-	public void update(Stamp item) {
+	public void update(Stamp stamp) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		session.update(item);
+		session.update(stamp);
 		transaction.commit();
 		session.close();
 	}
 
-	public void delete(Stamp item) {
+	public void delete(Stamp stamp) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		session.delete(item);
+		session.delete(stamp);
 		transaction.commit();
 		session.close();
 	}

@@ -1,6 +1,7 @@
 package com.goldenpond.stampbook.hibernate;
 
 import java.util.Date;
+import java.util.Random;
 
 import junit.framework.TestCase;
 
@@ -14,7 +15,7 @@ public class StampDaoTest extends TestCase {
 
 	private StampDao dao = new StampDao();
 	private Stamp item = new Stamp();
-	private static final int ID = 35;
+	private static final int ID = 37;
 
 	@Before
 	protected void setUp() {
@@ -22,13 +23,27 @@ public class StampDaoTest extends TestCase {
 	}
 
 	@Test
-	public void testCreate() {
+	public void testCreateWithNothingReturn() {
 		item.setIssueNumber("2012-04");
 		item.setName("a name");
 		item.setIssueDate(new Date());
 		item.setDesignedBy("a designer");
 		item.setPrintedBy("a printer");
 		dao.create(item);
+	}
+
+	@Test
+	public void testCreateByNameAndNumber() {
+
+		String randomIssueNumber = "2012-" + new Random().nextInt(100);
+		item = dao.create(randomIssueNumber, "a name");
+
+		assertNotNull(item.getId());
+		assertEquals(randomIssueNumber, item.getIssueNumber());
+		assertEquals("a name", item.getName());
+		assertNull(item.getIssueDate());
+		assertNull(item.getDesignedBy());
+		assertNull(item.getPrintedBy());
 	}
 
 	@Test
