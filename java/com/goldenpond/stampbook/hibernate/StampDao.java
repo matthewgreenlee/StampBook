@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.goldenpond.stampbook.HibernateUtil;
-import com.goldenpond.stampbook.Stamp;
+import com.goldenpond.stampbook.pojo.Stamp;
 
 public class StampDao {
 

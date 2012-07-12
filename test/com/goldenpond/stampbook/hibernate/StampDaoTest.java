@@ -9,13 +9,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.goldenpond.stampbook.Stamp;
+import com.goldenpond.stampbook.pojo.Stamp;
 
 public class StampDaoTest extends TestCase {
 
 	private StampDao dao = new StampDao();
 	private Stamp item = new Stamp();
-	private static final int ID = 37;
+	private long id = 37;
 
 	@Before
 	protected void setUp() {
@@ -37,6 +37,7 @@ public class StampDaoTest extends TestCase {
 
 		String randomIssueNumber = "2012-" + new Random().nextInt(100);
 		item = dao.create(randomIssueNumber, "a name");
+		this.id = item.getId();
 
 		assertNotNull(item.getId());
 		assertEquals(randomIssueNumber, item.getIssueNumber());
@@ -48,9 +49,9 @@ public class StampDaoTest extends TestCase {
 
 	@Test
 	public void testFetch() {
-		item.setId(ID);
+		item.setId(id);
 		Stamp fetched = dao.fetch(item);
-		assertEquals(ID, fetched.getId());
+		assertEquals(id, fetched.getId());
 		assertEquals("2012-04", fetched.getIssueNumber());
 		assertEquals("a designer", fetched.getDesignedBy());
 		assertEquals("a printer", fetched.getPrintedBy());
@@ -58,7 +59,7 @@ public class StampDaoTest extends TestCase {
 
 	@Test
 	public void testUpdate() {
-		item.setId(ID);
+		item.setId(id);
 		item.setIssueNumber("stampItemId12-05");
 		item.setName("a name");
 		item.setDesignedBy("another designer");
@@ -68,7 +69,7 @@ public class StampDaoTest extends TestCase {
 
 	@Test
 	public void testDelete() {
-		item.setId(ID);
+		item.setId(id);
 		dao.delete(item);
 	}
 

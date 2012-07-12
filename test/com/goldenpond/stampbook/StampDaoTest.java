@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.goldenpond.stampbook.pojo.Stamp;
+
 public class StampDaoTest extends TestCase {
 
 	private StampDao dao = new StampDao();;

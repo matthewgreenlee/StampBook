@@ -3,6 +3,8 @@ package com.goldenpond.stampbook;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.goldenpond.stampbook.pojo.Stamp;
+
 public class StampDao extends Dao{
 
 	public void create(Stamp item) {

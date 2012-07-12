@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook;
+package com.goldenpond.stampbook.pojo;
 
 import java.util.Date;
 
