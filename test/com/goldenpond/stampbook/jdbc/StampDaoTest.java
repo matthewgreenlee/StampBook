@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook;
+package com.goldenpond.stampbook.jdbc;
 
 import junit.framework.TestCase;
 
@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.goldenpond.stampbook.jdbc.StampDao;
 import com.goldenpond.stampbook.pojo.Stamp;
 
 public class StampDaoTest extends TestCase {

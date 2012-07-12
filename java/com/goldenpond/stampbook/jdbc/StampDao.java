@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook;
+package com.goldenpond.stampbook.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
