@@ -1,11 +1,13 @@
 package com.goldenpond.stampbook.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -25,6 +27,8 @@ public class Stamp {
 	private String designedBy;
 
 	private String printedBy;
+
+	private List<StampItem> items;
 
 	@Id
 	@Column(name = "STAMP_ID")
@@ -81,6 +85,15 @@ public class Stamp {
 
 	public void setPrintedBy(String printedBy) {
 		this.printedBy = printedBy;
+	}
+
+	@OneToMany(mappedBy = "stamp")
+	public List<StampItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<StampItem> items) {
+		this.items = items;
 	}
 
 	@Override

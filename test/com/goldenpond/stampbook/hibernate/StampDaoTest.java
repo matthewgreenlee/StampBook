@@ -1,6 +1,7 @@
 package com.goldenpond.stampbook.hibernate;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import junit.framework.TestCase;
@@ -70,6 +71,20 @@ public class StampDaoTest extends TestCase {
 	public void testDelete() {
 		item.setId(ID);
 		dao.delete(item);
+	}
+
+	@Test
+	public void testFindByIssueNumber() {
+		Stamp item = dao.findByIssueNumber("2012-04");
+		assertNotNull(item.getId());
+		assertNotNull(item.getName());
+		assertEquals("2012-04", item.getIssueNumber());
+	}
+
+	@Test
+	public void testFindAll() {
+		List<Stamp> stamps = dao.findAll();
+		assertEquals(10, stamps.size());
 	}
 
 	@After

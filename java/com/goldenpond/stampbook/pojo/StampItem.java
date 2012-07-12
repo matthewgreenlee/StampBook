@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -19,6 +21,8 @@ public class StampItem {
 	private String name;
 
 	private Long face;
+
+	private Stamp stamp;
 
 	public StampItem(String serialNumber, String name) {
 		super();
@@ -63,5 +67,15 @@ public class StampItem {
 
 	public void setFace(Long face) {
 		this.face = face;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "STAMP_ID")
+	public Stamp getStamp() {
+		return stamp;
+	}
+
+	public void setStamp(Stamp stamp) {
+		this.stamp = stamp;
 	}
 }

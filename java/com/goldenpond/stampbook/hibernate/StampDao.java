@@ -1,6 +1,9 @@
 package com.goldenpond.stampbook.hibernate;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -108,5 +111,48 @@ public class StampDao {
 		finally {
 			session.close();
 		}
+	}
+
+	public List<Stamp> findAll() {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<Stamp> stamps = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery("from Stamp");	// here "Stamp" is case sensitive
+			stamps = q.list();
+		}
+		catch (HibernateException he) {
+			tx.rollback();
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+		return stamps;
+	}
+
+	public Stamp findByIssueNumber(String issueNumber) {
+
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		Stamp stamp = null;
+		try {
+			tx = session.beginTransaction();
+			Query q = session.createQuery("from Stamp " +
+					"where ISSUE_NUMBER = :issueNumber"
+					);
+			q.setParameter("issueNumber", issueNumber);
+			stamp = (Stamp) q.uniqueResult();
+			tx.commit();
+		}
+		catch (HibernateException he) {
+			tx.rollback();
+		}
+		finally {
+			session.close();
+		}
+		return stamp;
 	}
 }
