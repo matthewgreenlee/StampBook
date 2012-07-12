@@ -12,11 +12,21 @@ public class StampDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 	public void create(Stamp stamp) {
+
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.save(stamp);
-		transaction.commit();
-		session.close();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(stamp);
+			tx.commit();
+		}
+		catch (HibernateException he) {
+			tx.rollback();
+			throw he;
+		}
+		finally {
+			session.close();
+		}
 	}
 
 	public Stamp create(String issueNumber, String name) {
@@ -33,6 +43,7 @@ public class StampDao {
 			tx.commit();
 		} catch (HibernateException he) {
 			tx.rollback();
+			throw he;
 		} finally {
 			session.close();
 		}
@@ -40,28 +51,60 @@ public class StampDao {
 	}
 
 	public Stamp fetch(Stamp stamp) {
-		Session session = sessionFactory.openSession();
+
 		Stamp selected = new Stamp();
-		Transaction transaction = session.beginTransaction();
-		session.load(selected, stamp.getId());
-		transaction.commit();
-		session.close();
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+//			selected = (Stamp) session.load(Stamp.class, stamp.getId());
+			session.load(selected, stamp.getId());
+			tx.commit();
+		}
+		catch (HibernateException he) {
+			tx.rollback();
+			throw he;
+		}
+		finally {
+			session.close();
+		}
 		return selected;
 	}
 
 	public void update(Stamp stamp) {
+
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.update(stamp);
-		transaction.commit();
-		session.close();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.update(stamp);
+			tx.commit();
+		}
+		catch (HibernateException he) {
+			tx.rollback();
+			throw he;
+		}
+		finally {
+			session.close();
+		}
 	}
 
 	public void delete(Stamp stamp) {
+
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.delete(stamp);
-		transaction.commit();
-		session.close();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.delete(stamp);
+			tx.commit();
+		}
+		catch (HibernateException he) {
+			tx.rollback();
+			throw he;
+		}
+		finally {
+			session.close();
+		}
 	}
 }
