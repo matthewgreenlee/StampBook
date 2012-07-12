@@ -18,7 +18,7 @@ public class StampItemDaoTest extends TestCase {
 	}
 
 	@Test
-	public void testCreate() {
+	public void testCreateWithoutFace() {
 		StampItem one;
 		one = dao.create("1-1", "an item name");
 		assertNotNull(one.getId());

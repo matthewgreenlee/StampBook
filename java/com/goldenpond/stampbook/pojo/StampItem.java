@@ -18,7 +18,7 @@ public class StampItem {
 
 	private String name;
 
-	private String money;
+	private Long face;
 
 	public StampItem(String serialNumber, String name) {
 		super();
@@ -56,12 +56,12 @@ public class StampItem {
 		this.name = name;
 	}
 
-	@Column(name = "MONEY")
-	public String getMoney() {
-		return money;
+	@Column(name = "FACE")
+	public Long getFace() {
+		return face;
 	}
 
-	public void setMoney(String money) {
-		this.money = money;
+	public void setFace(Long face) {
+		this.face = face;
 	}
 }
