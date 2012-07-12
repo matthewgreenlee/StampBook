@@ -20,7 +20,14 @@ public class StampItem {
 
 	private String money;
 
+	public StampItem(String serialNumber, String name) {
+		super();
+		this.serialNumber = serialNumber;
+		this.name = name;
+	}
+
 	@Id
+	@Column(name = "STAMP_ITEM_ID")
 	@GeneratedValue(generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	public Long getId() {

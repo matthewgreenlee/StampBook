@@ -15,7 +15,7 @@ public class StampDaoTest extends TestCase {
 
 	private StampDao dao = new StampDao();
 	private Stamp item = new Stamp();
-	private final long ID = 39;
+	private final long ID = 41;
 
 	@Before
 	protected void setUp() {

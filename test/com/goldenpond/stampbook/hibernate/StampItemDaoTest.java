@@ -11,7 +11,6 @@ import com.goldenpond.stampbook.pojo.StampItem;
 public class StampItemDaoTest extends TestCase {
 
 	private StampItemDao dao = new StampItemDao();
-	private StampItem item = new StampItem();
 
 	@Before
 	protected void setUp() {
@@ -20,7 +19,9 @@ public class StampItemDaoTest extends TestCase {
 
 	@Test
 	public void testCreate() {
-		
+		StampItem one;
+		one = dao.create("1-1", "an item name");
+		assertNotNull(one.getId());
 	}
 
 	@After

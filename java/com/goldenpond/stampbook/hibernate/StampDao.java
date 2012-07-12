@@ -41,10 +41,12 @@ public class StampDao {
 			tx = session.beginTransaction();
 			session.persist(stamp);
 			tx.commit();
-		} catch (HibernateException he) {
+		}
+		catch (HibernateException he) {
 			tx.rollback();
 			throw he;
-		} finally {
+		}
+		finally {
 			session.close();
 		}
 		return stamp;
