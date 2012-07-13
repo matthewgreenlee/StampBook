@@ -1,5 +1,6 @@
 package com.goldenpond.stampbook.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -9,8 +10,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampItem;
 
-public class StampDao {
+public class StampDao extends Dao {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -32,11 +34,11 @@ public class StampDao {
 		}
 	}
 
-	public Stamp create(String issueNumber, String name) {
+	public Stamp create(String issueNumber) {
 
 		Stamp stamp = new Stamp();
 		stamp.setIssueNumber(issueNumber);
-		stamp.setName(name);
+		stamp.setItems(new ArrayList<StampItem>());
 
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
@@ -84,24 +86,6 @@ public class StampDao {
 		try {
 			tx = session.beginTransaction();
 			session.update(stamp);
-			tx.commit();
-		}
-		catch (HibernateException he) {
-			tx.rollback();
-			throw he;
-		}
-		finally {
-			session.close();
-		}
-	}
-
-	public void delete(Stamp stamp) {
-
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.delete(stamp);
 			tx.commit();
 		}
 		catch (HibernateException he) {

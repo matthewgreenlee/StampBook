@@ -3,6 +3,7 @@ package com.goldenpond.stampbook.pojo;
 import java.util.Date;
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -87,7 +88,7 @@ public class Stamp {
 		this.printedBy = printedBy;
 	}
 
-	@OneToMany(mappedBy = "stamp")
+	@OneToMany(cascade=ALL, mappedBy = "stamp")
 	public List<StampItem> getItems() {
 		return items;
 	}

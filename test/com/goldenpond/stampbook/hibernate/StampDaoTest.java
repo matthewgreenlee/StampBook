@@ -34,14 +34,14 @@ public class StampDaoTest extends TestCase {
 	}
 
 	@Test
-	public void testCreateByNameAndNumber() {
+	public void testCreateWithIssueNumber() {
 
 		String randomIssueNumber = "2012-" + new Random().nextInt(100);
-		item = dao.create(randomIssueNumber, "a name");
+		item = dao.create(randomIssueNumber);
 
 		assertNotNull(item.getId());
 		assertEquals(randomIssueNumber, item.getIssueNumber());
-		assertEquals("a name", item.getName());
+		assertNull(item.getName());
 		assertNull(item.getIssueDate());
 		assertNull(item.getDesignedBy());
 		assertNull(item.getPrintedBy());

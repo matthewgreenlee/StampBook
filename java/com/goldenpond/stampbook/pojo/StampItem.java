@@ -24,10 +24,8 @@ public class StampItem {
 
 	private Stamp stamp;
 
-	public StampItem(String serialNumber, String name) {
+	public StampItem() {
 		super();
-		this.serialNumber = serialNumber;
-		this.name = name;
 	}
 
 	@Id
