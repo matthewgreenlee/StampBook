@@ -1,6 +1,7 @@
 package com.goldenpond.stampbook.hibernate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -28,20 +29,29 @@ public class StampItemDaoTest extends TestCase {
 	}
 
 	@Test
-	public void testCreateForExistingStamp() {
+	public void testAddToExistingStamp() {
 		Stamp existingStamp = new Stamp();
 		existingStamp.setId(8);
 		existingStamp.setIssueNumber("2012-02");
 		existingStamp.setItems(new ArrayList<StampItem>());
 
-		StampItem item = dao.create(existingStamp, "1-1");
+		StampItem item = dao.addToExistingStamp(existingStamp, "1-1");
 		assertNotNull(item.getId());
+	}
+
+	@Test
+	public void testFetchAll() {
+		Stamp stamp = new Stamp();
+		stamp.setId(8);
+		List<StampItem> items = dao.fetchAll(stamp);
+		assertNotNull(items);
+		assertEquals(5, items.size());
 	}
 
 	@Test
 	public void testDelete() {
 		StampItem item = new StampItem();
-		item.setId(Long.valueOf(4));
+		item.setId(Long.valueOf(7));
 		dao.delete(item);
 	}
 

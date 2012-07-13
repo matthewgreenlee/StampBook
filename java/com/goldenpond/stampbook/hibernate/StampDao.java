@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.goldenpond.stampbook.pojo.Stamp;
@@ -14,15 +13,13 @@ import com.goldenpond.stampbook.pojo.StampItem;
 
 public class StampDao extends Dao {
 
-	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
 	public void create(Stamp stamp) {
 
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.save(stamp);
+			session.persist(stamp);
 			tx.commit();
 		}
 		catch (HibernateException he) {
@@ -40,7 +37,7 @@ public class StampDao extends Dao {
 		stamp.setIssueNumber(issueNumber);
 		stamp.setItems(new ArrayList<StampItem>());
 
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -61,7 +58,7 @@ public class StampDao extends Dao {
 
 		Stamp selected = new Stamp();
 		
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -79,27 +76,9 @@ public class StampDao extends Dao {
 		return selected;
 	}
 
-	public void update(Stamp stamp) {
-
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.update(stamp);
-			tx.commit();
-		}
-		catch (HibernateException he) {
-			tx.rollback();
-			throw he;
-		}
-		finally {
-			session.close();
-		}
-	}
-
 	public List<Stamp> findAll() {
 
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		List<Stamp> stamps = null;
 		try {
@@ -117,9 +96,9 @@ public class StampDao extends Dao {
 		return stamps;
 	}
 
-	public Stamp findByIssueNumber(String issueNumber) {
+	public Stamp fetchByIssueNumber(String issueNumber) {
 
-		Session session = sessionFactory.openSession();
+		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		Stamp stamp = null;
 		try {

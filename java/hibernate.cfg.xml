@@ -30,9 +30,7 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
-<!-- 
-        <mapping resource="com/goldenpond/stampbook/pojo/Stamp.hbm.xml"/>
- -->
+
  		<mapping class="com.goldenpond.stampbook.pojo.Stamp"/>
  		<mapping class="com.goldenpond.stampbook.pojo.StampItem"/>
     </session-factory>

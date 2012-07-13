@@ -74,11 +74,11 @@ public class StampDaoTest extends TestCase {
 	}
 
 	@Test
-	public void testFindByIssueNumber() {
-		Stamp item = dao.findByIssueNumber("2012-04");
+	public void testFetchByIssueNumber() {
+		Stamp item = dao.fetchByIssueNumber("2012-02");
+		assertNotNull(item);
 		assertNotNull(item.getId());
-		assertNotNull(item.getName());
-		assertEquals("2012-04", item.getIssueNumber());
+		assertEquals("2012-02", item.getIssueNumber());
 	}
 
 	@Test

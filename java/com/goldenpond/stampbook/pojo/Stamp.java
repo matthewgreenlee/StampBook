@@ -1,9 +1,11 @@
 package com.goldenpond.stampbook.pojo;
 
+import static javax.persistence.CascadeType.ALL;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +32,11 @@ public class Stamp {
 	private String printedBy;
 
 	private List<StampItem> items;
+
+	public Stamp() {
+		super();
+		items = new ArrayList<StampItem>();
+	}
 
 	@Id
 	@Column(name = "STAMP_ID")
