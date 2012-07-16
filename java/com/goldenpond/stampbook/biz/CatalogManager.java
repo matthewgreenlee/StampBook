@@ -23,7 +23,7 @@ public class CatalogManager {
 		return instance;
 	}
 
-	public void addStamp(Stamp stamp) {
+	public void add(Stamp stamp) {
 		stampDao.create(stamp);
 		if (stamp.getItems().size() > 0) {
 			// create stamp items accordingly
