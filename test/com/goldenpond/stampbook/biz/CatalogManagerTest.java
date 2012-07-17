@@ -1,39 +1,61 @@
 package com.goldenpond.stampbook.biz;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
-import junit.framework.TestCase;
-
+import org.hibernate.HibernateException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.goldenpond.stampbook.pojo.Stamp;
 
-public class CatalogManagerTest extends TestCase {
+public class CatalogManagerTest {
 
 	private CatalogManager manager;
 
-	private static Long existingId = Long.valueOf(1);
-	private static Long nonExistentId = Long.valueOf(-1);
+	private static final Long existingId = Long.valueOf(1);
+	private static final Long nonExistentId = Long.valueOf(-1);
 
 	@Before
-	protected void setUp() {
+	public void setUp() {
 		manager = CatalogManager.getInstance();
 	}
 
 	@Test
 	public void testAdd() {
+		Stamp stamp = createDummyStampInMemory();
+		manager.add(stamp);
+		assertNotNull(stamp.getId());
+	}
+
+	private Stamp createDummyStampInMemory() {
 		Stamp stamp = new Stamp();
-		stamp.setIssueNumber("2012-23");
+		stamp.setIssueNumber(getIssueNumber());
 		stamp.setName("a name");
 		stamp.setIssueDate(new Date());
 		stamp.setDesignedBy("a designer");
 		stamp.setPrintedBy("a printer");
+		return stamp;
+	}
+
+	private String getIssueNumber() {
+		return "2012-" + new Random().nextInt(100);
+	}
+
+	@Test(expected = HibernateException.class)
+	public void testAddDuplicateIssueNumber() {
+		String duplicateIssueNumber = getIssueNumber();
+		Stamp stamp = createDummyStampInMemory();
+		stamp.setIssueNumber(duplicateIssueNumber);
 		manager.add(stamp);
-		assertNotNull(stamp.getId());
-		nonExistentId = stamp.getId();
+
+		Stamp another = createDummyStampInMemory();
+		another.setIssueNumber(duplicateIssueNumber);
+		manager.add(another);
 	}
 
 	@Test
@@ -43,9 +65,14 @@ public class CatalogManagerTest extends TestCase {
 	}
 
 	@Test
-	public void testGet() {
+	public void testGetExisting() {
 		Stamp stamp = manager.get(existingId);
 		assertNotNull(stamp);
+	}
+
+	@Test(expected = HibernateException.class)
+	public void testGetNonExistant() {
+		manager.get(nonExistentId);
 	}
 
 	@Test
@@ -56,13 +83,21 @@ public class CatalogManagerTest extends TestCase {
 	}
 
 	@Test
-	public void testRemove() {
-		Stamp stamp = manager.get(nonExistentId);
+	public void testRemoveCreated() {
+		Stamp stamp = createDummyStampInMemory();
+		manager.add(stamp);
+		manager.remove(stamp);
+	}
+
+	@Test(expected = HibernateException.class)
+	public void testRemoveNonExistent() {
+		Stamp stamp = createDummyStampInMemory();
+		stamp.setId(nonExistentId);
 		manager.remove(stamp);
 	}
 
 	@After
-	protected void tearDown() {
+	public void tearDown() {
 		manager = null;
 	}
 }
