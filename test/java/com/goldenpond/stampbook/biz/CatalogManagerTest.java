@@ -11,11 +11,14 @@ import org.hibernate.HibernateException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.goldenpond.stampbook.pojo.Stamp;
 
 public class CatalogManagerTest {
 
+	private ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"services.xml"});
 	private CatalogManager manager;
 	private Stamp stamp;
 
@@ -25,7 +28,7 @@ public class CatalogManagerTest {
 
 	@Before
 	public void setUp() {
-		manager = CatalogManager.getInstance();
+		manager = ctx.getBean(CatalogManager.class);
 		stamp = new Stamp();
 		stamp.setIssueNumber("2012-" + new Random().nextInt(100));
 		stamp.setName("a name");

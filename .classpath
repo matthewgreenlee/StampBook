@@ -18,5 +18,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDBC drivers"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate lib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring lib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Commons lib"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
