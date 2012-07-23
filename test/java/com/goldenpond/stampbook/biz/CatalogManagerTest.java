@@ -29,7 +29,7 @@ public class CatalogManagerTest {
 	@Before
 	public void setUp() {
 		manager = ctx.getBean(CatalogManager.class);
-		stamp = new Stamp();
+		stamp = ctx.getBean(Stamp.class);
 		stamp.setIssueNumber("2012-" + new Random().nextInt(100));
 		stamp.setName("a name");
 		stamp.setIssueDate(new Date());
