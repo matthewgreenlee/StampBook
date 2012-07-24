@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+
 public abstract class Dao {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -38,6 +39,24 @@ public abstract class Dao {
 		try {
 			tx = session.beginTransaction();
 			session.delete(obj);
+			tx.commit();
+		}
+		catch (HibernateException he) {
+			tx.rollback();
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+	}
+
+	public void create(Object obj) {
+	
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.persist(obj);
 			tx.commit();
 		}
 		catch (HibernateException he) {

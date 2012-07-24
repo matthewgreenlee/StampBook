@@ -13,24 +13,6 @@ import com.goldenpond.stampbook.pojo.StampItem;
 
 public class StampDao extends Dao {
 
-	public void create(Stamp stamp) {
-
-		Session session = getSessionFactory().openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.persist(stamp);
-			tx.commit();
-		}
-		catch (HibernateException he) {
-			tx.rollback();
-			throw he;
-		}
-		finally {
-			session.close();
-		}
-	}
-
 	public Stamp create(String issueNumber) {
 
 		Stamp stamp = new Stamp();
