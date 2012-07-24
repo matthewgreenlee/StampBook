@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="catalogManager" class="com.goldenpond.stampbook.biz.CatalogManager" factory-method="getInstance"></bean>
+	<bean id="stampDao" class="com.goldenpond.stampbook.hibernate.StampDao"></bean>
+	<bean id="stampItemDao" class="com.goldenpond.stampbook.hibernate.StampItemDao"></bean>
 
 </beans>

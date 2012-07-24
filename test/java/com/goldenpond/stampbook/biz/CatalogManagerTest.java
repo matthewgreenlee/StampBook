@@ -18,7 +18,7 @@ import com.goldenpond.stampbook.pojo.Stamp;
 
 public class CatalogManagerTest {
 
-	private ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"services.xml"});
+	private ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"services.xml", "daos.xml"});
 	private CatalogManager manager;
 	private Stamp stamp;
 
@@ -29,7 +29,7 @@ public class CatalogManagerTest {
 	@Before
 	public void setUp() {
 		manager = ctx.getBean(CatalogManager.class);
-		stamp = ctx.getBean(Stamp.class);
+		stamp = new Stamp();
 		stamp.setIssueNumber("2012-" + new Random().nextInt(100));
 		stamp.setName("a name");
 		stamp.setIssueDate(new Date());
