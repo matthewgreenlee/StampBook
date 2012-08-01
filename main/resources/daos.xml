@@ -7,4 +7,5 @@
 	<bean id="stampDao" class="com.goldenpond.stampbook.hibernate.StampDao"></bean>
 	<bean id="stampItemDao" class="com.goldenpond.stampbook.hibernate.StampItemDao"></bean>
 
+	<bean id="userCollectionDao" class="com.goldenpond.stampbook.hibernate.UserCollectionDao"></bean>
 </beans>

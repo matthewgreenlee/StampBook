@@ -5,5 +5,8 @@
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<bean id="catalogManager" class="com.goldenpond.stampbook.biz.CatalogManager" factory-method="getInstance"></bean>
+	<bean id="collectionService" class="com.goldenpond.stampbook.biz.CollectionService" scope="singleton">
+		<property name="userCollectionDao" ref="userCollectionDao"></property>
+	</bean>
 
 </beans>
