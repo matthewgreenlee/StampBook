@@ -1,22 +1,19 @@
 package com.goldenpond.stampbook.pojo;
 
-import static javax.persistence.CascadeType.ALL;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "STAMP")
+@XmlRootElement
 public class Stamp {
 
 	private long id;
@@ -31,11 +28,11 @@ public class Stamp {
 
 	private String printedBy;
 
-	private List<StampItem> items;
+//	private List<StampItem> items;
 
 	public Stamp() {
 		super();
-		items = new ArrayList<StampItem>();
+//		items = new ArrayList<StampItem>();
 	}
 
 	@Id
@@ -95,14 +92,15 @@ public class Stamp {
 		this.printedBy = printedBy;
 	}
 
-	@OneToMany(cascade=ALL, mappedBy = "stamp")
-	public List<StampItem> getItems() {
-		return items;
-	}
-
-	public void setItems(List<StampItem> items) {
-		this.items = items;
-	}
+//	@OneToMany(cascade=ALL, mappedBy = "stamp")
+//	@XmlElement
+//	public List<StampItem> getItems() {
+//		return items;
+//	}
+//
+//	public void setItems(List<StampItem> items) {
+//		this.items = items;
+//	}
 
 	@Override
 	public String toString() {

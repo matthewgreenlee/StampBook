@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "STAMP_ITEM")
+@XmlRootElement
 public class StampItem {
 
 	private Long id;

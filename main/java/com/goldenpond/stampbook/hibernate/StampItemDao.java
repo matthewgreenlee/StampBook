@@ -39,7 +39,7 @@ public class StampItemDao extends Dao {
 		StampItem item = new StampItem();
 		item.setSerialNumber(serialNumber);
 		item.setStamp(stamp);
-		stamp.getItems().add(item);
+//		stamp.getItems().add(item);
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
@@ -83,7 +83,7 @@ public class StampItemDao extends Dao {
 
 	public void removeFromExistingStamp(Stamp stamp, StampItem item) {
 
-		stamp.getItems().remove(item);
+//		stamp.getItems().remove(item);
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;

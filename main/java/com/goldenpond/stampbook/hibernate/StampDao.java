@@ -17,7 +17,7 @@ public class StampDao extends Dao {
 
 		Stamp stamp = new Stamp();
 		stamp.setIssueNumber(issueNumber);
-		stamp.setItems(new ArrayList<StampItem>());
+//		stamp.setItems(new ArrayList<StampItem>());
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
