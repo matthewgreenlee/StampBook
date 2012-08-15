@@ -22,7 +22,7 @@ public class StampResource {
 	}
 
 	@GET
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces(MediaType.APPLICATION_JSON)
 	public Stamp get(@PathParam("stamp") Long stampId) {
 		Stamp stamp = new Stamp();
 		stamp.setId(stampId);

@@ -33,7 +33,7 @@ public class StampItemDaoTest extends TestCase {
 		Stamp existingStamp = new Stamp();
 		existingStamp.setId(8);
 		existingStamp.setIssueNumber("2012-02");
-		existingStamp.setItems(new ArrayList<StampItem>());
+//		existingStamp.setItems(new ArrayList<StampItem>());
 
 		StampItem item = dao.addToExistingStamp(existingStamp, "1-1");
 		assertNotNull(item.getId());

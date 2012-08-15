@@ -25,12 +25,12 @@ public class CatalogManager {
 
 	public void add(Stamp stamp) {
 		stampDao.create(stamp);
-		if (stamp.getItems().size() > 0) {
-			// create stamp items accordingly
-			for (StampItem item : stamp.getItems()) {
-				itemDao.addToExistingStamp(stamp, item.getSerialNumber());
-			}
-		}
+//		if (stamp.getItems().size() > 0) {
+//			// create stamp items accordingly
+//			for (StampItem item : stamp.getItems()) {
+//				itemDao.addToExistingStamp(stamp, item.getSerialNumber());
+//			}
+//		}
 	}
 
 	public List<Stamp> listAll() {
