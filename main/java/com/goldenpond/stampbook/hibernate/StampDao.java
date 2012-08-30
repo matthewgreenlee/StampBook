@@ -1,15 +1,14 @@
 package com.goldenpond.stampbook.hibernate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.goldenpond.stampbook.pojo.Stamp;
-import com.goldenpond.stampbook.pojo.StampItem;
 
 public class StampDao extends Dao {
 
@@ -47,6 +46,9 @@ public class StampDao extends Dao {
 //			selected = (Stamp) session.load(Stamp.class, stamp.getId());
 			session.load(selected, stamp.getId());
 			tx.commit();
+		}
+		catch (ObjectNotFoundException e) {
+			selected = null;
 		}
 		catch (HibernateException he) {
 			tx.rollback();
