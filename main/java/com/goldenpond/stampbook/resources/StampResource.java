@@ -3,23 +3,22 @@ package com.goldenpond.stampbook.resources;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.goldenpond.stampbook.hibernate.StampDao;
-import com.goldenpond.stampbook.hibernate.StampItemDao;
 import com.goldenpond.stampbook.pojo.Stamp;
 
 @Produces(MediaType.APPLICATION_XML)
 public class StampResource {
 
 	private StampDao stampDao;
-	private StampItemDao itemDao;
 	private String stampId;
 
 	StampResource(String stampId) {
 		stampDao = new StampDao();
-		itemDao = new StampItemDao();
 		this.stampId = stampId;
 	}
 
@@ -47,5 +46,10 @@ public class StampResource {
 	public void deleteStamp() {
 		Stamp stamp = getStamp();
 		stampDao.delete(stamp);
+	}
+
+	@Path("{item}")
+	public ItemResource getItemResource(@PathParam("item") String item) {
+		return new ItemResource(stampId, item);
 	}
 }
