@@ -13,6 +13,7 @@ import com.goldenpond.stampbook.biz.CatalogManager;
 import com.goldenpond.stampbook.pojo.Stamps;
 
 @Path("/stamps")
+@Produces(MediaType.APPLICATION_XML)
 public class StampsResource {
 
 	@Context UriInfo uriInfo;
@@ -20,12 +21,11 @@ public class StampsResource {
 
 	@Path("{stampId}")
 	public StampResource getStampResource(@PathParam("stampId") String stampId) {
-		return new StampResource(stampId);
+		return new StampResource(uriInfo, request, stampId);
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
 	public Stamps getStamps() {
-		return new Stamps(CatalogManager.getInstance().listAll());
+		return CatalogManager.getInstance().getStamps();
 	}
 }

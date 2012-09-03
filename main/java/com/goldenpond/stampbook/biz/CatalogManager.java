@@ -6,6 +6,7 @@ import com.goldenpond.stampbook.hibernate.StampDao;
 import com.goldenpond.stampbook.hibernate.StampItemDao;
 import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.StampItem;
+import com.goldenpond.stampbook.pojo.Stamps;
 
 public class CatalogManager {
 
@@ -25,19 +26,12 @@ public class CatalogManager {
 
 	public void add(Stamp stamp) {
 		stampDao.create(stamp);
-//		if (stamp.getItems().size() > 0) {
-//			// create stamp items accordingly
-//			for (StampItem item : stamp.getItems()) {
-//				itemDao.addToExistingStamp(stamp, item.getSerialNumber());
-//			}
-//		}
 	}
 
 	public List<Stamp> listAll() {
 		return stampDao.findAll();
 	}
 
-	// get stamp also all attached items
 	public Stamp get(Long stampId) {
 		Stamp stamp = new Stamp();
 		stamp.setId(stampId);
@@ -50,5 +44,26 @@ public class CatalogManager {
 
 	public void remove(Stamp stamp) {
 		stampDao.delete(stamp);
+	}
+
+	public Stamp remove(Long stampId) {
+		Stamp s = get(stampId);
+		if (s == null) return null;
+		remove(s);
+		return s;
+	}
+
+	public boolean has(Long stampId) {
+		return get(stampId) != null;
+	}
+
+	public Stamps getStamps() {
+		return new Stamps(listAll());
+	}
+
+	public StampItem getItem(String stampId, String serialNumber) {
+		Stamp s = get(Long.valueOf(stampId));
+		StampItem i = itemDao.fetch(s.getIssueNumber(), serialNumber);
+		return i;
 	}
 }
