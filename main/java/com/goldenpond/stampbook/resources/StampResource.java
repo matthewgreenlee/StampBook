@@ -8,25 +8,21 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.goldenpond.stampbook.hibernate.StampDao;
+import com.goldenpond.stampbook.biz.CatalogManager;
 import com.goldenpond.stampbook.pojo.Stamp;
 
 @Produces(MediaType.APPLICATION_XML)
 public class StampResource {
 
-	private StampDao stampDao;
 	private String stampId;
 
 	StampResource(String stampId) {
-		stampDao = new StampDao();
 		this.stampId = stampId;
 	}
 
 	@GET
 	public Stamp getStamp() {
-		Stamp stamp = new Stamp();
-		stamp.setId(Long.valueOf(stampId));
-		return stampDao.fetch(stamp);
+		return CatalogManager.getInstance().get(Long.valueOf(stampId));
 	}
 
 	@PUT
@@ -34,7 +30,7 @@ public class StampResource {
 		Stamp stamp = getStamp();
 		if (stamp != null) {
 			stamp.setName(data);
-			stampDao.update(stamp);
+			CatalogManager.getInstance().modify(stamp);
 		}
 		else {
 			// it does not make sense to create a stamp using id if the stamp does not exist
@@ -45,7 +41,7 @@ public class StampResource {
 	@DELETE
 	public void deleteStamp() {
 		Stamp stamp = getStamp();
-		stampDao.delete(stamp);
+		CatalogManager.getInstance().remove(stamp);
 	}
 
 	@Path("{item}")
