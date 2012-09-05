@@ -7,12 +7,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "STAMP_ITEM")
+@XmlRootElement(name = "item")
+@XmlType(propOrder = { "serialNumber", "name", "face" })
 public class StampItem {
 
 	private Long id;
@@ -33,6 +37,7 @@ public class StampItem {
 	@Column(name = "STAMP_ITEM_ID")
 	@GeneratedValue(generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
+	@XmlTransient
 	public Long getId() {
 		return id;
 	}

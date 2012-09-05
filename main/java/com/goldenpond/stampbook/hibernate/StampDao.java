@@ -74,6 +74,10 @@ public class StampDao extends Dao {
 			tx = session.beginTransaction();
 			Query q = session.createQuery("from Stamp");	// here "Stamp" is case sensitive
 			stamps = q.list();
+			// replace below for loop with eager initialization
+			for (Stamp s : stamps) {
+				s.getItems().size();
+			}
 		}
 		catch (HibernateException he) {
 			tx.rollback();

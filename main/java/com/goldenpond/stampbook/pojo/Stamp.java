@@ -13,12 +13,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "STAMP")
 @XmlRootElement
+@XmlType(propOrder={"id", "name", "issueNumber", "issueDate", "designedBy", "printedBy", "items"})
 public class Stamp {
 
 	private long id;
