@@ -2,6 +2,7 @@ package com.goldenpond.stampbook.resources;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Request;
@@ -22,6 +23,11 @@ public class ItemResource {
 	ItemResource(UriInfo uriInfo, Request request, String stampId, String item) {
 		this.stampId = stampId;
 		this.serialNumber = item;
+	}
+
+	@POST
+	public StampItem createItem() {
+		return null;
 	}
 
 	@GET

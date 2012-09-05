@@ -49,7 +49,7 @@ public class CatalogManager {
 	public Stamp remove(Long stampId) {
 		Stamp s = get(stampId);
 		if (s == null) return null;
-		remove(s);
+		stampDao.delete(s);
 		return s;
 	}
 
