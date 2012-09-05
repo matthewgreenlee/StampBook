@@ -66,4 +66,19 @@ public class CatalogManager {
 		StampItem i = itemDao.fetch(s.getIssueNumber(), serialNumber);
 		return i;
 	}
+
+	public void createItem(StampItem i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateItem(StampItem i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteItem(StampItem i) {
+		// TODO Auto-generated method stub
+		
+	}
 }

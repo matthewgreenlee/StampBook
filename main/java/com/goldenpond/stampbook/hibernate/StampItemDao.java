@@ -38,7 +38,7 @@ public class StampItemDao extends Dao {
 
 		StampItem item = new StampItem();
 		item.setSerialNumber(serialNumber);
-		item.setStamp(stamp);
+//		item.setStamp(stamp);
 //		stamp.getItems().add(item);
 
 		Session session = getSessionFactory().openSession();

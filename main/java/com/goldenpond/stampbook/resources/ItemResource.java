@@ -26,8 +26,12 @@ public class ItemResource {
 	}
 
 	@POST
-	public StampItem createItem() {
-		return null;
+	public StampItem postItem(String data) {
+		StampItem i = new StampItem();
+		i.setSerialNumber(serialNumber);
+		i.setName(data);
+		CatalogManager.getInstance().createItem(i);
+		return i;
 	}
 
 	@GET
@@ -40,12 +44,17 @@ public class ItemResource {
 	}
 
 	@PUT
-	public Response putItem() {
-		return null;
+	public Response putItem(String data) {
+		StampItem i = getItem();
+		i.setName(data);
+		CatalogManager.getInstance().updateItem(i);
+		return Response.noContent().build();
 	}
 
 	@DELETE
 	public void deleteItem() {
+		StampItem i = getItem();
+		CatalogManager.getInstance().deleteItem(i);
 		return;
 	}
 }

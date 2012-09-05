@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampItem;
 
 public class StampDao extends Dao {
 
@@ -45,6 +46,10 @@ public class StampDao extends Dao {
 			tx = session.beginTransaction();
 //			selected = (Stamp) session.load(Stamp.class, stamp.getId());
 			session.load(selected, stamp.getId());
+			// actively load associated items
+			for (StampItem item : selected.getItems()) {
+				;
+			}
 			tx.commit();
 		}
 		catch (ObjectNotFoundException e) {

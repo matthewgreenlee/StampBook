@@ -7,13 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "STAMP_ITEM")
-@XmlRootElement
 public class StampItem {
 
 	private Long id;
@@ -71,6 +70,7 @@ public class StampItem {
 
 	@ManyToOne
 	@JoinColumn(name = "STAMP_ID")
+	@XmlTransient
 	public Stamp getStamp() {
 		return stamp;
 	}
