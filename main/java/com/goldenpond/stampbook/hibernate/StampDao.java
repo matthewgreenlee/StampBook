@@ -2,6 +2,7 @@ package com.goldenpond.stampbook.hibernate;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
@@ -46,10 +47,7 @@ public class StampDao extends Dao {
 			tx = session.beginTransaction();
 //			selected = (Stamp) session.load(Stamp.class, stamp.getId());
 			session.load(selected, stamp.getId());
-			// actively load associated items
-			for (StampItem item : selected.getItems()) {
-				;
-			}
+			Hibernate.initialize(selected.getItems());
 			tx.commit();
 		}
 		catch (ObjectNotFoundException e) {
@@ -74,9 +72,8 @@ public class StampDao extends Dao {
 			tx = session.beginTransaction();
 			Query q = session.createQuery("from Stamp");	// here "Stamp" is case sensitive
 			stamps = q.list();
-			// replace below for loop with eager initialization
 			for (Stamp s : stamps) {
-				s.getItems().size();
+				Hibernate.initialize(s.getItems());
 			}
 		}
 		catch (HibernateException he) {
