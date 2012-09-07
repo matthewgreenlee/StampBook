@@ -1,6 +1,9 @@
 package com.goldenpond.stampbook.resources;
 
+import java.util.Date;
+
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -30,9 +33,17 @@ public class StampResource {
 	}
 
 	@POST
-	public Stamp postStamp(String data) {
+	public Stamp postStamp(@FormParam("issueNumber") String issueNumber,
+			@FormParam("name") String name,
+			@FormParam("issueDate") Date issueDate,
+			@FormParam("designedBy") String designedBy,
+			@FormParam("printedBy") String printedBy) {
 		Stamp s = new Stamp();
-		s.setIssueNumber(data);
+		s.setIssueNumber(issueNumber);
+		s.setName(name);
+		s.setIssueDate(issueDate);
+		s.setDesignedBy(designedBy);
+		s.setPrintedBy(printedBy);
 		CatalogManager.getInstance().add(s);
 		return s;
 	}
