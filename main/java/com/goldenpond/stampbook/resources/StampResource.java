@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.goldenpond.stampbook.biz.CatalogManager;
@@ -58,11 +59,21 @@ public class StampResource {
 	}
 
 	@PUT
-	public void putStamp(String data) {
-		Stamp stamp = getStamp();
-		if (stamp != null) {
-			stamp.setName(data);
-			CatalogManager.getInstance().modify(stamp);
+	public Response putStamp(@FormParam("issueNumber") String issueNumber,
+			@FormParam("name") String name,
+			@FormParam("issueDate") Date issueDate,
+			@FormParam("designedBy") String designedBy,
+			@FormParam("printedBy") String printedBy) {
+		Stamp s = getStamp();
+		if (s != null) {
+			// did not extract data correctly here
+//			s.setIssueNumber(issueNumber);
+//			s.setName(name);
+//			s.setIssueDate(issueDate);
+//			s.setDesignedBy(designedBy);
+//			s.setPrintedBy(printedBy);
+			CatalogManager.getInstance().modify(s);
+			return Response.ok().build();
 		}
 		else {
 			// it does not make sense to create a stamp using id if the stamp does not exist

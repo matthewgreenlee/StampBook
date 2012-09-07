@@ -3,14 +3,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Post Stamp</title>
+<script type="text/javascript">
+function putStamp() {
+	var xmlhttp;
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			alert("put stamp done");
+		}
+	}
+	xmlhttp.open("PUT", "rest/stamps/2", true);
+	var formElement = document.getElementById("stampForm");
+	xmlhttp.send(new FormData(formElement));
+}
+</script>
 </head>
 <body>
-	<form action="rest/stamps/2" method="POST">
+	<form action="rest/stamps/2" method="POST" id="stampForm">
 		Issue Number <input type="text" name="issueNumber">
 		Name <input type="text" name="name">
 		Designed By <input type="text" name="designedBy">
 		Printed By <input type="text" name="printedBy">
 		<input type="submit" name="submit">
 	</form>
+	<button type="button" onclick="putStamp()">PUT Stamp</button>
 </body>
 </html>

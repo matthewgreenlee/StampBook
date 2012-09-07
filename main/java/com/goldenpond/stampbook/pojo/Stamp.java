@@ -111,8 +111,9 @@ public class Stamp {
 
 	@Override
 	public String toString() {
-		return "StampItem [issueNumber=" + issueNumber + ", name=" + name
-				+ ", issueDate=" + issueDate + ", designedBy=" + designedBy
-				+ ", printedBy=" + printedBy + "]";
+		return "Stamp [id=" + id + ", issueNumber=" + issueNumber + ", name="
+				+ name + ", issueDate=" + issueDate + ", designedBy="
+				+ designedBy + ", printedBy=" + printedBy + ", items=" + items
+				+ "]";
 	}
 }
