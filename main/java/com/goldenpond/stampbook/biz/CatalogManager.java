@@ -32,7 +32,7 @@ public class CatalogManager {
 		return stampDao.findAll();
 	}
 
-	public Stamp get(Long stampId) {
+	public Stamp get(long stampId) {
 		Stamp stamp = new Stamp();
 		stamp.setId(stampId);
 		return stampDao.fetch(stamp);
@@ -61,8 +61,8 @@ public class CatalogManager {
 		return new Stamps(listAll());
 	}
 
-	public StampItem getItem(String stampId, String serialNumber) {
-		Stamp s = get(Long.valueOf(stampId));
+	public StampItem getItem(long stampId, String serialNumber) {
+		Stamp s = get(stampId);
 		StampItem i = itemDao.fetch(s.getIssueNumber(), serialNumber);
 		return i;
 	}

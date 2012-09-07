@@ -17,10 +17,10 @@ public class ItemResource {
 
 	@Context UriInfo uriInfo;
 	@Context Request request;
-	String stampId;
+	long stampId;
 	String serialNumber;
 
-	ItemResource(UriInfo uriInfo, Request request, String stampId, String item) {
+	ItemResource(UriInfo uriInfo, Request request, long stampId, String item) {
 		this.stampId = stampId;
 		this.serialNumber = item;
 	}

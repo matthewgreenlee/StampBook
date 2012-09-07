@@ -20,7 +20,7 @@ public class StampsResource {
 	@Context Request request;
 
 	@Path("{stampId}")
-	public StampResource getStampResource(@PathParam("stampId") String stampId) {
+	public StampResource getStampResource(@PathParam("stampId") long stampId) {
 		return new StampResource(uriInfo, request, stampId);
 	}
 

@@ -21,9 +21,9 @@ public class StampResource {
 
 	@Context UriInfo uriInfo;
 	@Context Request request;
-	String stampId;
+	long stampId;
 
-	StampResource(UriInfo uriInfo, Request request, String stampId) {
+	StampResource(UriInfo uriInfo, Request request, long stampId) {
 		this.uriInfo = uriInfo;
 		this.request = request;
 		this.stampId = stampId;
@@ -39,7 +39,7 @@ public class StampResource {
 
 	@GET
 	public Stamp getStamp() {
-		Stamp s = CatalogManager.getInstance().get(Long.valueOf(stampId));
+		Stamp s = CatalogManager.getInstance().get(stampId);
 		if (s == null) {
 			throw new NotFoundException("Stamp not found");
 		}
@@ -61,7 +61,7 @@ public class StampResource {
 
 	@DELETE
 	public void deleteStamp() {
-		Stamp s = CatalogManager.getInstance().remove(Long.valueOf(stampId));
+		Stamp s = CatalogManager.getInstance().remove(stampId);
 		if (s == null) {
 			throw new NotFoundException("Stamp not found");
 		}
