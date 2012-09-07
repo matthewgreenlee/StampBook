@@ -1,6 +1,7 @@
 package com.goldenpond.stampbook.resources;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.goldenpond.stampbook.biz.CatalogManager;
+import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.StampItem;
 import com.sun.jersey.api.NotFoundException;
 
@@ -26,10 +28,15 @@ public class ItemResource {
 	}
 
 	@POST
-	public StampItem postItem(String data) {
+	public StampItem postItem(@FormParam("serialNumber") String serialNumber,
+			@FormParam("name") String name, 
+			@FormParam("face") long face) {
 		StampItem i = new StampItem();
 		i.setSerialNumber(serialNumber);
-		i.setName(data);
+		i.setName(name);
+		i.setFace(face);
+		Stamp s = CatalogManager.getInstance().get(stampId);
+		i.setStamp(s);
 		CatalogManager.getInstance().createItem(i);
 		return i;
 	}

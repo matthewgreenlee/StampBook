@@ -68,8 +68,9 @@ public class CatalogManager {
 	}
 
 	public void createItem(StampItem i) {
-		// TODO Auto-generated method stub
-		
+		if (i.getStamp() != null) {
+			itemDao.create(i);
+		}
 	}
 
 	public void updateItem(StampItem i) {
