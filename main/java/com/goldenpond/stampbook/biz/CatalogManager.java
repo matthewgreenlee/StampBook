@@ -74,12 +74,10 @@ public class CatalogManager {
 	}
 
 	public void updateItem(StampItem i) {
-		// TODO Auto-generated method stub
-		
+		itemDao.update(i);
 	}
 
 	public void deleteItem(StampItem i) {
-		// TODO Auto-generated method stub
-		
+		itemDao.delete(i);
 	}
 }

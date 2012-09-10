@@ -28,11 +28,10 @@ public class ItemResource {
 	}
 
 	@POST
-	public StampItem postItem(@FormParam("serialNumber") String serialNumber,
-			@FormParam("name") String name, 
+	public StampItem postItem(@FormParam("name") String name,
 			@FormParam("face") long face) {
 		StampItem i = new StampItem();
-		i.setSerialNumber(serialNumber);
+		i.setSerialNumber(this.serialNumber);
 		i.setName(name);
 		i.setFace(face);
 		Stamp s = CatalogManager.getInstance().get(stampId);
@@ -51,11 +50,12 @@ public class ItemResource {
 	}
 
 	@PUT
-	public Response putItem(String data) {
+	public Response putItem(@FormParam("name") String name, @FormParam("face") long face) {
 		StampItem i = getItem();
-		i.setName(data);
+		i.setName(name);
+		i.setFace(face);
 		CatalogManager.getInstance().updateItem(i);
-		return Response.noContent().build();
+		return Response.ok().build();
 	}
 
 	@DELETE
