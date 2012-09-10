@@ -2,6 +2,7 @@ package com.goldenpond.stampbook.resources;
 
 import java.util.Date;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -34,6 +35,7 @@ public class StampResource {
 	}
 
 	@POST
+	@Consumes("application/x-www-form-urlencoded")
 	public Stamp postStamp(@FormParam("issueNumber") String issueNumber,
 			@FormParam("name") String name,
 			@FormParam("issueDate") Date issueDate,
@@ -59,6 +61,7 @@ public class StampResource {
 	}
 
 	@PUT
+	@Consumes("application/x-www-form-urlencoded")
 	public Response putStamp(@FormParam("issueNumber") String issueNumber,
 			@FormParam("name") String name,
 			@FormParam("issueDate") Date issueDate,
@@ -66,12 +69,11 @@ public class StampResource {
 			@FormParam("printedBy") String printedBy) {
 		Stamp s = getStamp();
 		if (s != null) {
-			// did not extract data correctly here
-//			s.setIssueNumber(issueNumber);
-//			s.setName(name);
-//			s.setIssueDate(issueDate);
-//			s.setDesignedBy(designedBy);
-//			s.setPrintedBy(printedBy);
+			s.setIssueNumber(issueNumber);
+			s.setName(name);
+			s.setIssueDate(issueDate);
+			s.setDesignedBy(designedBy);
+			s.setPrintedBy(printedBy);
 			CatalogManager.getInstance().modify(s);
 			return Response.ok().build();
 		}
