@@ -6,7 +6,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -32,23 +31,6 @@ public class StampResource {
 		this.uriInfo = uriInfo;
 		this.request = request;
 		this.stampId = stampId;
-	}
-
-	@POST
-	@Consumes("application/x-www-form-urlencoded")
-	public Stamp postStamp(@FormParam("issueNumber") String issueNumber,
-			@FormParam("name") String name,
-			@FormParam("issueDate") Date issueDate,
-			@FormParam("designedBy") String designedBy,
-			@FormParam("printedBy") String printedBy) {
-		Stamp s = new Stamp();
-		s.setIssueNumber(issueNumber);
-		s.setName(name);
-		s.setIssueDate(issueDate);
-		s.setDesignedBy(designedBy);
-		s.setPrintedBy(printedBy);
-		CatalogManager.getInstance().add(s);
-		return s;
 	}
 
 	@GET
