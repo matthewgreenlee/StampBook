@@ -49,8 +49,7 @@ public class StampDaoTest extends TestCase {
 
 	@Test
 	public void testFetch() {
-		item.setId(ID);
-		Stamp fetched = dao.fetch(item);
+		Stamp fetched = dao.fetchById(ID);
 		assertEquals(ID, fetched.getId());
 		assertEquals("2012-04", fetched.getIssueNumber());
 		assertEquals("a designer", fetched.getDesignedBy());

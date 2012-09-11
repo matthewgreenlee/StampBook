@@ -9,11 +9,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.goldenpond.stampbook.dao.StampDaoI;
 import com.goldenpond.stampbook.pojo.Stamp;
-import com.goldenpond.stampbook.pojo.StampItem;
 
-public class StampDao extends Dao {
+public class StampDao extends Dao implements StampDaoI {
 
+	@Override
 	public Stamp create(String issueNumber) {
 
 		Stamp stamp = new Stamp();
@@ -37,7 +38,8 @@ public class StampDao extends Dao {
 		return stamp;
 	}
 
-	public Stamp fetch(Stamp stamp) {
+	@Override
+	public Stamp fetchById(long id) {
 
 		Stamp selected = new Stamp();
 		
@@ -45,8 +47,7 @@ public class StampDao extends Dao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-//			selected = (Stamp) session.load(Stamp.class, stamp.getId());
-			session.load(selected, stamp.getId());
+			session.load(selected, id);
 			Hibernate.initialize(selected.getItems());
 			tx.commit();
 		}
@@ -63,6 +64,7 @@ public class StampDao extends Dao {
 		return selected;
 	}
 
+	@Override
 	public List<Stamp> findAll() {
 
 		Session session = getSessionFactory().openSession();
@@ -86,6 +88,7 @@ public class StampDao extends Dao {
 		return stamps;
 	}
 
+	@Override
 	public Stamp fetchByIssueNumber(String issueNumber) {
 
 		Session session = getSessionFactory().openSession();

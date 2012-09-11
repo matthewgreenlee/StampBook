@@ -33,9 +33,7 @@ public class CatalogManager {
 	}
 
 	public Stamp get(long stampId) {
-		Stamp stamp = new Stamp();
-		stamp.setId(stampId);
-		return stampDao.fetch(stamp);
+		return stampDao.fetchById(stampId);
 	}
 
 	public void modify(Stamp stamp) {

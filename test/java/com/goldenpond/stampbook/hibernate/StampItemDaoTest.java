@@ -22,20 +22,14 @@ public class StampItemDaoTest extends TestCase {
 	}
 
 	@Test
-	public void testCreate() {
-		StampItem item;
-		item = dao.create("1-1");
-		assertNotNull(item.getId());
-	}
-
-	@Test
 	public void testAddToExistingStamp() {
 		Stamp existingStamp = new Stamp();
 		existingStamp.setId(8);
 		existingStamp.setIssueNumber("2012-02");
-//		existingStamp.setItems(new ArrayList<StampItem>());
-
-		StampItem item = dao.addToExistingStamp(existingStamp, "1-1");
+		existingStamp.setItems(new ArrayList<StampItem>());
+		StampItem newItem = new StampItem();
+		newItem.setSerialNumber("1-1");
+		StampItem item = dao.addToExistingStamp(existingStamp, newItem);
 		assertNotNull(item.getId());
 	}
 
@@ -43,7 +37,7 @@ public class StampItemDaoTest extends TestCase {
 	public void testFetchAll() {
 		Stamp stamp = new Stamp();
 		stamp.setId(8);
-		List<StampItem> items = dao.fetchAll(stamp);
+		List<StampItem> items = dao.fetchItems(stamp);
 		assertNotNull(items);
 		assertEquals(5, items.size());
 	}

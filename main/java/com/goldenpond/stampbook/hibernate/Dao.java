@@ -5,8 +5,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.goldenpond.stampbook.dao.DaoI;
 
-public abstract class Dao {
+
+public abstract class Dao implements DaoI {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -14,6 +16,7 @@ public abstract class Dao {
 		return sessionFactory;
 	}
 
+	@Override
 	public void update(Object obj) {
 	
 		Session session = sessionFactory.openSession();
@@ -32,6 +35,7 @@ public abstract class Dao {
 		}
 	}
 
+	@Override
 	public void delete(Object obj) {
 	
 		Session session = sessionFactory.openSession();
@@ -50,6 +54,7 @@ public abstract class Dao {
 		}
 	}
 
+	@Override
 	public void create(Object obj) {
 	
 		Session session = sessionFactory.openSession();

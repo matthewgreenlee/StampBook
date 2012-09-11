@@ -7,39 +7,19 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.goldenpond.stampbook.dao.StampItemDaoI;
 import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.StampItem;
 
-public class StampItemDao extends Dao {
+public class StampItemDao extends Dao implements StampItemDaoI {
 
-	public StampItem create(String serialNumber) {
+	@Override
+	public StampItem addToExistingStamp(Stamp stamp, StampItem item) {
 
-		StampItem item = new StampItem();
-		item.setSerialNumber(serialNumber);
-
-		Session session = getSessionFactory().openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.persist(item);
-			tx.commit();
-		}
-		catch (HibernateException he) {
-			tx.rollback();
-			throw he;
-		}
-		finally {
-			session.close();
-		}
-		return item;
-	}
-
-	public StampItem addToExistingStamp(Stamp stamp, String serialNumber) {
-
-		StampItem item = new StampItem();
-		item.setSerialNumber(serialNumber);
-//		item.setStamp(stamp);
-//		stamp.getItems().add(item);
+//		StampItem item = new StampItem();
+//		item.setSerialNumber(item);
+		item.setStamp(stamp);
+		stamp.getItems().add(item);
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
@@ -58,7 +38,8 @@ public class StampItemDao extends Dao {
 		return item;
 	}
 
-	public List<StampItem> fetchAll(Stamp stamp) {
+	@Override
+	public List<StampItem> fetchItems(Stamp stamp) {
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
@@ -81,6 +62,7 @@ public class StampItemDao extends Dao {
 		return items;
 	}
 
+	@Override
 	public void removeFromExistingStamp(Stamp stamp, StampItem item) {
 
 //		stamp.getItems().remove(item);
@@ -101,6 +83,7 @@ public class StampItemDao extends Dao {
 		}
 	}
 
+	@Override
 	public StampItem fetch(String issueNumber, String serialNumber) {
 
 		Session session = getSessionFactory().openSession();
