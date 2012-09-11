@@ -16,8 +16,6 @@ public class StampItemDao extends Dao implements StampItemDaoI {
 	@Override
 	public StampItem addToExistingStamp(Stamp stamp, StampItem item) {
 
-//		StampItem item = new StampItem();
-//		item.setSerialNumber(item);
 		item.setStamp(stamp);
 		stamp.getItems().add(item);
 
@@ -65,7 +63,7 @@ public class StampItemDao extends Dao implements StampItemDaoI {
 	@Override
 	public void removeFromExistingStamp(Stamp stamp, StampItem item) {
 
-//		stamp.getItems().remove(item);
+		stamp.getItems().remove(item);
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;

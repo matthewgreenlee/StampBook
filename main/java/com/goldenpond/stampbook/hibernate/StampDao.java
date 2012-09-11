@@ -1,5 +1,6 @@
 package com.goldenpond.stampbook.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -11,6 +12,7 @@ import org.hibernate.Transaction;
 
 import com.goldenpond.stampbook.dao.StampDaoI;
 import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampItem;
 
 public class StampDao extends Dao implements StampDaoI {
 
@@ -19,7 +21,7 @@ public class StampDao extends Dao implements StampDaoI {
 
 		Stamp stamp = new Stamp();
 		stamp.setIssueNumber(issueNumber);
-//		stamp.setItems(new ArrayList<StampItem>());
+		stamp.setItems(new ArrayList<StampItem>());
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
