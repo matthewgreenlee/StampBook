@@ -74,7 +74,7 @@ public class StampItem {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "STAMP_ID")
+	@JoinColumn(name = "STAMP_ID", nullable=false)
 	@XmlTransient
 	public Stamp getStamp() {
 		return stamp;
