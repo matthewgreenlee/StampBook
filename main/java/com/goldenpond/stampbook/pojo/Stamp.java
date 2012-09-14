@@ -20,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "STAMP")
 @XmlRootElement
-@XmlType(propOrder={"id", "name", "issueNumber", "issueDate", "designedBy", "printedBy", "items"})
+@XmlType(propOrder={"id", "name", "type", "issueNumber", "issueDate", "designedBy", "printedBy", "items"})
 public class Stamp {
 
 	private long id;
