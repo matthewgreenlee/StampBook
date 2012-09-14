@@ -1,5 +1,7 @@
 package com.goldenpond.stampbook.pojo;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ public class StampItem {
 
 	private String name;
 
-	private Long face;
+	private BigDecimal face;
 
 	private Stamp stamp;
 
@@ -65,11 +67,11 @@ public class StampItem {
 	}
 
 	@Column(name = "FACE")
-	public Long getFace() {
+	public BigDecimal getFace() {
 		return face;
 	}
 
-	public void setFace(Long face) {
+	public void setFace(BigDecimal face) {
 		this.face = face;
 	}
 

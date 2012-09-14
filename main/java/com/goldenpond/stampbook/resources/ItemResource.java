@@ -1,5 +1,7 @@
 package com.goldenpond.stampbook.resources;
 
+import java.math.BigDecimal;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -29,7 +31,7 @@ public class ItemResource {
 
 	@POST
 	public StampItem postItem(@FormParam("name") String name,
-			@FormParam("face") long face) {
+			@FormParam("face") BigDecimal face) {
 		StampItem i = new StampItem();
 		i.setSerialNumber(this.serialNumber);
 		i.setName(name);
@@ -50,7 +52,7 @@ public class ItemResource {
 	}
 
 	@PUT
-	public Response putItem(@FormParam("name") String name, @FormParam("face") long face) {
+	public Response putItem(@FormParam("name") String name, @FormParam("face") BigDecimal face) {
 		StampItem i = getItem();
 		i.setName(name);
 		i.setFace(face);
