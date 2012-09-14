@@ -29,6 +29,8 @@ public class Stamp {
 
 	private String name;
 
+	private String type;
+
 	private Date issueDate;
 
 	private String designedBy;
@@ -70,6 +72,15 @@ public class Stamp {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Column(name = "TYPE")
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Column(name = "ISSUE_DATE")

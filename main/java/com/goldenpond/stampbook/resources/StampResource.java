@@ -46,6 +46,7 @@ public class StampResource {
 	@Consumes("application/x-www-form-urlencoded")
 	public Response putStamp(@FormParam("issueNumber") String issueNumber,
 			@FormParam("name") String name,
+			@FormParam("type") String type,
 			@FormParam("issueDate") Date issueDate,
 			@FormParam("designedBy") String designedBy,
 			@FormParam("printedBy") String printedBy) {
@@ -53,6 +54,7 @@ public class StampResource {
 		if (s != null) {
 			s.setIssueNumber(issueNumber);
 			s.setName(name);
+			s.setType(type);
 			s.setIssueDate(issueDate);
 			s.setDesignedBy(designedBy);
 			s.setPrintedBy(printedBy);
