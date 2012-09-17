@@ -54,8 +54,8 @@ public class ItemResource {
 	@PUT
 	public Response putItem(@FormParam("name") String name, @FormParam("face") BigDecimal face) {
 		StampItem i = getItem();
-		i.setName(name);
-		i.setFace(face);
+		if (name != null) i.setName(name);
+		if (face != null) i.setFace(face);
 		CatalogManager.getInstance().updateItem(i);
 		return Response.ok().build();
 	}

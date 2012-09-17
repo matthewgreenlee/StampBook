@@ -52,12 +52,12 @@ public class StampResource {
 			@FormParam("printedBy") String printedBy) {
 		Stamp s = getStamp();
 		if (s != null) {
-			s.setIssueNumber(issueNumber);
-			s.setName(name);
-			s.setType(type);
-			s.setIssueDate(issueDate);
-			s.setDesignedBy(designedBy);
-			s.setPrintedBy(printedBy);
+			if (issueNumber != null) s.setIssueNumber(issueNumber);
+			if (name != null) s.setName(name);
+			if (type != null) s.setType(type);
+			if (issueDate != null) s.setIssueDate(issueDate);
+			if (designedBy != null) s.setDesignedBy(designedBy);
+			if (printedBy != null) s.setPrintedBy(printedBy);
 			CatalogManager.getInstance().modify(s);
 			return Response.ok().build();
 		}

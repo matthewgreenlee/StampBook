@@ -23,7 +23,7 @@ public abstract class Dao implements DaoI {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.update(obj);
+			session.merge(obj);
 			tx.commit();
 		}
 		catch (HibernateException he) {
