@@ -18,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "STAMP_ITEM")
 @XmlRootElement(name = "item")
-@XmlType(propOrder = { "serialNumber", "name", "face" })
+@XmlType(propOrder = { "serialNumber", "name", "face", "image" })
 public class StampItem {
 
 	private Long id;
@@ -28,6 +28,8 @@ public class StampItem {
 	private String name;
 
 	private BigDecimal face;
+
+	private String image;
 
 	private Stamp stamp;
 
@@ -73,6 +75,15 @@ public class StampItem {
 
 	public void setFace(BigDecimal face) {
 		this.face = face;
+	}
+
+	@Column(name = "IMAGE")
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@ManyToOne

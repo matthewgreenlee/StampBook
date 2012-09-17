@@ -31,11 +31,12 @@ public class ItemResource {
 
 	@POST
 	public StampItem postItem(@FormParam("name") String name,
-			@FormParam("face") BigDecimal face) {
+			@FormParam("face") BigDecimal face, @FormParam("image") String image) {
 		StampItem i = new StampItem();
 		i.setSerialNumber(this.serialNumber);
 		i.setName(name);
 		i.setFace(face);
+		i.setImage(image);
 		Stamp s = CatalogManager.getInstance().get(stampId);
 		i.setStamp(s);
 		CatalogManager.getInstance().createItem(i);
@@ -52,10 +53,12 @@ public class ItemResource {
 	}
 
 	@PUT
-	public Response putItem(@FormParam("name") String name, @FormParam("face") BigDecimal face) {
+	public Response putItem(@FormParam("name") String name,
+			@FormParam("face") BigDecimal face, @FormParam("image") String image) {
 		StampItem i = getItem();
 		if (name != null) i.setName(name);
 		if (face != null) i.setFace(face);
+		if (image != null) i.setImage(image);
 		CatalogManager.getInstance().updateItem(i);
 		return Response.ok().build();
 	}
