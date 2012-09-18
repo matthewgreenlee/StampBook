@@ -61,9 +61,14 @@ public class CatalogManager {
 	}
 
 	public StampItem getItem(long stampId, String serialNumber) {
-		Stamp s = get(stampId);
-		StampItem i = itemDao.fetch(s.getIssueNumber(), serialNumber);
-		return i;
+		Stamp s = null;
+		try {
+			s = get(stampId);
+		}
+		catch (Exception e) {
+			throw new StampBookException(e);
+		}
+		return s != null ? s.getItem(serialNumber) : null;
 	}
 
 	public void createItem(StampItem i) {

@@ -127,4 +127,13 @@ public class Stamp {
 				+ designedBy + ", printedBy=" + printedBy + ", items=" + items
 				+ "]";
 	}
+
+	public StampItem getItem(String serialNumber) {
+		for (StampItem i : items) {
+			if (serialNumber.equals(i.getSerialNumber())) {
+				return i;
+			}
+		}
+		return null;
+	}
 }
