@@ -7,12 +7,14 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.goldenpond.stampbook.biz.CatalogManager;
+import com.goldenpond.stampbook.exception.StampBookException;
 import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.StampItem;
 import com.sun.jersey.api.NotFoundException;
@@ -59,7 +61,12 @@ public class ItemResource {
 		if (name != null) i.setName(name);
 		if (face != null) i.setFace(face);
 		if (image != null) i.setImage(image);
-		CatalogManager.getInstance().updateItem(i);
+		try {
+			CatalogManager.getInstance().updateItem(i);
+		}
+		catch (StampBookException e) {
+			throw new WebApplicationException(e);
+		}
 		return Response.ok().build();
 	}
 

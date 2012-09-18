@@ -2,6 +2,7 @@ package com.goldenpond.stampbook.biz;
 
 import java.util.List;
 
+import com.goldenpond.stampbook.exception.StampBookException;
 import com.goldenpond.stampbook.hibernate.StampDao;
 import com.goldenpond.stampbook.hibernate.StampItemDao;
 import com.goldenpond.stampbook.pojo.Stamp;
@@ -72,7 +73,12 @@ public class CatalogManager {
 	}
 
 	public void updateItem(StampItem i) {
-		itemDao.update(i);
+		try {
+			itemDao.update(i);
+		} 
+		catch (Exception e) {
+			throw new StampBookException(e);
+		}
 	}
 
 	public void deleteItem(StampItem i) {
