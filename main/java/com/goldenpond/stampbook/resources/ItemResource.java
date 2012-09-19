@@ -39,9 +39,10 @@ public class ItemResource {
 		i.setName(name);
 		i.setFace(face);
 		i.setImage(image);
-		Stamp s = CatalogManager.getInstance().get(stampId);
-		i.setStamp(s);
-		CatalogManager.getInstance().createItem(i);
+//		Stamp s = CatalogManager.getInstance().get(stampId);
+//		i.setStamp(s);
+//		CatalogManager.getInstance().createItem(i);
+		CatalogManager.getInstance().createItem(stampId, i);
 		return i;
 	}
 

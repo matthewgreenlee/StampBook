@@ -6,4 +6,8 @@ public class StampBookException extends RuntimeException {
 		super(e);
 	}
 
+	public StampBookException(String message) {
+		super(message);
+	}
+
 }

@@ -136,4 +136,18 @@ public class Stamp {
 		}
 		return null;
 	}
+
+	public boolean hasItem(StampItem item) {
+		for (StampItem i : items) {
+			if (i.getSerialNumber().equals(item.getSerialNumber())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addItem(StampItem item) {
+		items.add(item);
+		item.setStamp(this);
+	}
 }

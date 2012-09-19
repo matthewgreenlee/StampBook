@@ -77,6 +77,17 @@ public class CatalogManager {
 		}
 	}
 
+	public void createItem(long stampId, StampItem i) {
+		Stamp s = get(stampId);
+		if (s == null) throw new StampBookException("Stamp not found");
+		if (s.hasItem(i)) {
+			throw new StampBookException("Item already exists");
+		} else {
+			s.addItem(i);
+		}
+		stampDao.update(s);
+	}
+
 	public void updateItem(StampItem i) {
 		try {
 			itemDao.update(i);
