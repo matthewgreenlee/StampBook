@@ -52,10 +52,6 @@ public class CatalogManager {
 		return s;
 	}
 
-	public boolean has(Long stampId) {
-		return get(stampId) != null;
-	}
-
 	public Stamps getStamps() {
 		return new Stamps(listAll());
 	}
@@ -71,15 +67,10 @@ public class CatalogManager {
 		return s != null ? s.getItem(serialNumber) : null;
 	}
 
-	public void createItem(StampItem i) {
-		if (i.getStamp() != null) {
-			itemDao.create(i);
-		}
-	}
-
 	public void createItem(long stampId, StampItem i) {
 		Stamp s = get(stampId);
-		if (s == null) throw new StampBookException("Stamp not found");
+		if (s == null) 
+			throw new StampBookException("Stamp not found");
 		if (s.hasItem(i)) {
 			throw new StampBookException("Item already exists");
 		} else {
@@ -88,16 +79,25 @@ public class CatalogManager {
 		stampDao.update(s);
 	}
 
-	public void updateItem(StampItem i) {
-		try {
-			itemDao.update(i);
-		} 
-		catch (Exception e) {
-			throw new StampBookException(e);
+	public void updateItem(long stampId, StampItem item) {
+		Stamp s = get(stampId);
+		if (s == null) 
+			throw new StampBookException("Stamp not found");
+		if (s.hasItem(item)) {
+			StampItem i = s.getItem(item.getSerialNumber());
+			if (item.getName() != null) i.setName(item.getName());
+			if (item.getFace() != null) i.setFace(item.getFace());
+			if (item.getImage() != null) i.setImage(item.getImage());
+		} else {
+			throw new StampBookException("Item not found");
 		}
+		stampDao.update(s);
 	}
 
-	public void deleteItem(StampItem i) {
+	public void deleteItem(long stampId, String serialNumber) {
+		StampItem i = getItem(stampId, serialNumber);
+		if (i == null)
+			throw new StampBookException("Item not found");
 		itemDao.delete(i);
 	}
 }
