@@ -3,7 +3,6 @@ package com.goldenpond.stampbook.biz;
 import java.util.List;
 
 import com.goldenpond.stampbook.hibernate.UserCollectionDao;
-import com.goldenpond.stampbook.pojo.User;
 import com.goldenpond.stampbook.pojo.UserCollection;
 
 public class CollectionService {
@@ -42,11 +41,6 @@ public class CollectionService {
 
 	public void modify(UserCollection userCollection) {
 		dao.update(userCollection);
-	}
-
-	public List<UserCollection> getCollections(User user) {
-		// list all collections with the same user id
-		return null;
 	}
 
 	public List<UserCollection> getCollections(long userId) {
