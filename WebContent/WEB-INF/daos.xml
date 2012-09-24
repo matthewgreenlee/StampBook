@@ -4,8 +4,5 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="stampDao" class="com.goldenpond.stampbook.hibernate.StampDao"></bean>
-	<bean id="itemDao" class="com.goldenpond.stampbook.hibernate.StampItemDao"></bean>
-
 	<bean id="userCollectionDao" class="com.goldenpond.stampbook.hibernate.UserCollectionDao"></bean>
 </beans>

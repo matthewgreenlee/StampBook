@@ -32,7 +32,7 @@
         <property name="hbm2ddl.auto">update</property>
 
  		<mapping class="com.goldenpond.stampbook.pojo.Stamp"/>
- 		<mapping class="com.goldenpond.stampbook.pojo.StampItem"/>
+ 		<mapping class="com.goldenpond.stampbook.pojo.Item"/>
  		<mapping class="com.goldenpond.stampbook.pojo.UserCollection"/>
     </session-factory>
 

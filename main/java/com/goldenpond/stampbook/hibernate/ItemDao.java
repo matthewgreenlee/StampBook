@@ -6,11 +6,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.dao.ItemDaoI;
-import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.Item;
+import com.goldenpond.stampbook.pojo.Stamp;
 
+@Component
+@Scope("singleton")
 public class ItemDao extends Dao implements ItemDaoI {
 
 	@Override

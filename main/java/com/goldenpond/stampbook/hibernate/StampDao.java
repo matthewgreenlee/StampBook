@@ -9,11 +9,15 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.dao.StampDaoI;
-import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.Item;
+import com.goldenpond.stampbook.pojo.Stamp;
 
+@Component
+@Scope("singleton")
 public class StampDao extends Dao implements StampDaoI {
 
 	@Override

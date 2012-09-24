@@ -32,7 +32,6 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
       /WEB-INF/services.xml
-      /WEB-INF/daos.xml
     </param-value>
   </context-param>
   <listener>

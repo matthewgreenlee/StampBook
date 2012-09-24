@@ -7,12 +7,8 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="com.goldenpond.stampbook.resources"></context:component-scan>
+	<context:component-scan base-package="com.goldenpond.stampbook.resources, com.goldenpond.stampbook.biz, com.goldenpond.stampbook.hibernate"></context:component-scan>
 
-	<bean id="catalogManager" class="com.goldenpond.stampbook.biz.CatalogManager" scope="singleton">
-		<property name="stampDao" ref="stampDao"></property>
-		<property name="itemDao" ref="itemDao"></property>
-	</bean>
 	<bean id="collectionService" class="com.goldenpond.stampbook.biz.CollectionService" scope="singleton">
 		<property name="userCollectionDao" ref="userCollectionDao"></property>
 	</bean>

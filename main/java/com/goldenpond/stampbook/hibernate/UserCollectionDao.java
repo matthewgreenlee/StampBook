@@ -5,9 +5,13 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.pojo.UserCollection;
 
+@Component
+@Scope("singleton")
 public class UserCollectionDao extends Dao {
 
 	public List<UserCollection> findAll(long userId) {

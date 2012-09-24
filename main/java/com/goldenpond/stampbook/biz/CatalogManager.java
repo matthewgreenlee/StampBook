@@ -2,25 +2,23 @@ package com.goldenpond.stampbook.biz;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.goldenpond.stampbook.exception.StampBookException;
-import com.goldenpond.stampbook.hibernate.StampDao;
 import com.goldenpond.stampbook.hibernate.ItemDao;
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.hibernate.StampDao;
 import com.goldenpond.stampbook.pojo.Item;
+import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.Stamps;
 
+@Component
+@Scope("singleton")
 public class CatalogManager {
 
-	private StampDao stampDao;
-	private ItemDao itemDao;
-
-	public void setStampDao(StampDao stampDao) {
-		this.stampDao = stampDao;
-	}
-
-	public void setItemDao(ItemDao itemDao) {
-		this.itemDao = itemDao;
-	}
+	@Autowired(required=true) StampDao stampDao;
+	@Autowired(required=true) ItemDao itemDao;
 
 	public void add(Stamp stamp) {
 		stampDao.create(stamp);
