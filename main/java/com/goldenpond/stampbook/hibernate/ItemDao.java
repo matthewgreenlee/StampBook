@@ -7,14 +7,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.goldenpond.stampbook.dao.StampItemDaoI;
+import com.goldenpond.stampbook.dao.ItemDaoI;
 import com.goldenpond.stampbook.pojo.Stamp;
-import com.goldenpond.stampbook.pojo.StampItem;
+import com.goldenpond.stampbook.pojo.Item;
 
-public class StampItemDao extends Dao implements StampItemDaoI {
+public class ItemDao extends Dao implements ItemDaoI {
 
 	@Override
-	public StampItem addToExistingStamp(Stamp stamp, StampItem item) {
+	public Item addToExistingStamp(Stamp stamp, Item item) {
 
 		item.setStamp(stamp);
 		stamp.getItems().add(item);
@@ -37,11 +37,11 @@ public class StampItemDao extends Dao implements StampItemDaoI {
 	}
 
 	@Override
-	public List<StampItem> fetchItems(Stamp stamp) {
+	public List<Item> fetchItems(Stamp stamp) {
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
-		List<StampItem> items = null;
+		List<Item> items = null;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery("from StampItem " +
@@ -61,7 +61,7 @@ public class StampItemDao extends Dao implements StampItemDaoI {
 	}
 
 	@Override
-	public void removeFromExistingStamp(Stamp stamp, StampItem item) {
+	public void removeFromExistingStamp(Stamp stamp, Item item) {
 
 		stamp.getItems().remove(item);
 
@@ -82,11 +82,11 @@ public class StampItemDao extends Dao implements StampItemDaoI {
 	}
 
 	@Override
-	public StampItem fetch(String issueNumber, String serialNumber) {
+	public Item fetch(String issueNumber, String serialNumber) {
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
-		StampItem item = null;
+		Item item = null;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery("from Stamp where ISSUE_NUMBER = :issueNumber");
@@ -95,7 +95,7 @@ public class StampItemDao extends Dao implements StampItemDaoI {
 			q = session.createQuery("from StampItem where SERIAL_NUMBER = :serialNumber and STAMP_ID = :stampId");
 			q.setParameter("serialNumber", serialNumber);
 			q.setParameter("stampId", stamp.getId());
-			item = (StampItem) q.uniqueResult();
+			item = (Item) q.uniqueResult();
 			tx.commit();
 		}
 		catch (HibernateException he) {

@@ -4,21 +4,21 @@ import java.util.List;
 
 import com.goldenpond.stampbook.exception.StampBookException;
 import com.goldenpond.stampbook.hibernate.StampDao;
-import com.goldenpond.stampbook.hibernate.StampItemDao;
+import com.goldenpond.stampbook.hibernate.ItemDao;
 import com.goldenpond.stampbook.pojo.Stamp;
-import com.goldenpond.stampbook.pojo.StampItem;
+import com.goldenpond.stampbook.pojo.Item;
 import com.goldenpond.stampbook.pojo.Stamps;
 
 public class CatalogManager {
 
 	private StampDao stampDao;
-	private StampItemDao itemDao;
+	private ItemDao itemDao;
 
 	public void setStampDao(StampDao stampDao) {
 		this.stampDao = stampDao;
 	}
 
-	public void setItemDao(StampItemDao itemDao) {
+	public void setItemDao(ItemDao itemDao) {
 		this.itemDao = itemDao;
 	}
 
@@ -53,7 +53,7 @@ public class CatalogManager {
 		return new Stamps(listAll());
 	}
 
-	public StampItem getItem(long stampId, String serialNumber) {
+	public Item getItem(long stampId, String serialNumber) {
 		Stamp s = null;
 		try {
 			s = get(stampId);
@@ -64,7 +64,7 @@ public class CatalogManager {
 		return s != null ? s.getItem(serialNumber) : null;
 	}
 
-	public void createItem(long stampId, StampItem i) {
+	public void createItem(long stampId, Item i) {
 		Stamp s = get(stampId);
 		if (s == null) 
 			throw new StampBookException("Stamp not found");
@@ -76,12 +76,12 @@ public class CatalogManager {
 		stampDao.update(s);
 	}
 
-	public void updateItem(long stampId, StampItem item) {
+	public void updateItem(long stampId, Item item) {
 		Stamp s = get(stampId);
 		if (s == null) 
 			throw new StampBookException("Stamp not found");
 		if (s.hasItem(item)) {
-			StampItem i = s.getItem(item.getSerialNumber());
+			Item i = s.getItem(item.getSerialNumber());
 			if (item.getName() != null) i.setName(item.getName());
 			if (item.getFace() != null) i.setFace(item.getFace());
 			if (item.getImage() != null) i.setImage(item.getImage());
@@ -92,7 +92,7 @@ public class CatalogManager {
 	}
 
 	public void deleteItem(long stampId, String serialNumber) {
-		StampItem i = getItem(stampId, serialNumber);
+		Item i = getItem(stampId, serialNumber);
 		if (i == null)
 			throw new StampBookException("Item not found");
 		itemDao.delete(i);

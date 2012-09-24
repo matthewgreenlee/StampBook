@@ -37,11 +37,11 @@ public class Stamp {
 
 	private String printedBy;
 
-	private List<StampItem> items;
+	private List<Item> items;
 
 	public Stamp() {
 		super();
-		items = new ArrayList<StampItem>();
+		items = new ArrayList<Item>();
 	}
 
 	@Id
@@ -112,11 +112,11 @@ public class Stamp {
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="stamp")
 	@XmlElement(name="item")
-	public List<StampItem> getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
 
-	public void setItems(List<StampItem> items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 
@@ -128,8 +128,8 @@ public class Stamp {
 				+ "]";
 	}
 
-	public StampItem getItem(String serialNumber) {
-		for (StampItem i : items) {
+	public Item getItem(String serialNumber) {
+		for (Item i : items) {
 			if (serialNumber.equals(i.getSerialNumber())) {
 				return i;
 			}
@@ -137,8 +137,8 @@ public class Stamp {
 		return null;
 	}
 
-	public boolean hasItem(StampItem item) {
-		for (StampItem i : items) {
+	public boolean hasItem(Item item) {
+		for (Item i : items) {
 			if (i.getSerialNumber().equals(item.getSerialNumber())) {
 				return true;
 			}
@@ -146,7 +146,7 @@ public class Stamp {
 		return false;
 	}
 
-	public void addItem(StampItem item) {
+	public void addItem(Item item) {
 		items.add(item);
 		item.setStamp(this);
 	}

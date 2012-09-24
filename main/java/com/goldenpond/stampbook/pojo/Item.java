@@ -19,7 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "STAMP_ITEM")
 @XmlRootElement(name = "item")
 @XmlType(propOrder = { "serialNumber", "name", "face", "image" })
-public class StampItem {
+public class Item {
 
 	private Long id;
 
@@ -33,7 +33,7 @@ public class StampItem {
 
 	private Stamp stamp;
 
-	public StampItem() {
+	public Item() {
 		super();
 	}
 

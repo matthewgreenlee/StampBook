@@ -10,11 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.goldenpond.stampbook.pojo.Stamp;
-import com.goldenpond.stampbook.pojo.StampItem;
+import com.goldenpond.stampbook.pojo.Item;
 
-public class StampItemDaoTest extends TestCase {
+public class ItemDaoTest extends TestCase {
 
-	private StampItemDao dao = new StampItemDao();
+	private ItemDao dao = new ItemDao();
 
 	@Before
 	protected void setUp() {
@@ -26,10 +26,10 @@ public class StampItemDaoTest extends TestCase {
 		Stamp existingStamp = new Stamp();
 		existingStamp.setId(8);
 		existingStamp.setIssueNumber("2012-02");
-		existingStamp.setItems(new ArrayList<StampItem>());
-		StampItem newItem = new StampItem();
+		existingStamp.setItems(new ArrayList<Item>());
+		Item newItem = new Item();
 		newItem.setSerialNumber("1-1");
-		StampItem item = dao.addToExistingStamp(existingStamp, newItem);
+		Item item = dao.addToExistingStamp(existingStamp, newItem);
 		assertNotNull(item.getId());
 	}
 
@@ -37,14 +37,14 @@ public class StampItemDaoTest extends TestCase {
 	public void testFetchAll() {
 		Stamp stamp = new Stamp();
 		stamp.setId(8);
-		List<StampItem> items = dao.fetchItems(stamp);
+		List<Item> items = dao.fetchItems(stamp);
 		assertNotNull(items);
 		assertEquals(5, items.size());
 	}
 
 	@Test
 	public void testDelete() {
-		StampItem item = new StampItem();
+		Item item = new Item();
 		item.setId(Long.valueOf(7));
 		dao.delete(item);
 	}

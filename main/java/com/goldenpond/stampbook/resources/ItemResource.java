@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.biz.CatalogManager;
 import com.goldenpond.stampbook.exception.StampBookException;
-import com.goldenpond.stampbook.pojo.StampItem;
+import com.goldenpond.stampbook.pojo.Item;
 import com.sun.jersey.api.NotFoundException;
 
 @Component
@@ -35,13 +35,13 @@ public class ItemResource {
 	@Autowired CatalogManager catalogManager;
 
 	@POST
-	public StampItem postItem(
+	public Item postItem(
 			@PathParam("stampId") long stampId,
 			@PathParam("serialNumber") String serialNumber,
 			@FormParam("name") String name,
 			@FormParam("face") BigDecimal face,
 			@FormParam("image") String image) {
-		StampItem i = new StampItem();
+		Item i = new Item();
 		i.setSerialNumber(serialNumber);
 		i.setName(name);
 		i.setFace(face);
@@ -56,10 +56,10 @@ public class ItemResource {
 	}
 
 	@GET
-	public StampItem getItem(
+	public Item getItem(
 			@PathParam("stampId") long stampId,
 			@PathParam("serialNumber") String serialNumber) {
-		StampItem i = catalogManager.getItem(stampId, serialNumber);
+		Item i = catalogManager.getItem(stampId, serialNumber);
 		if (i == null) {
 			throw new NotFoundException("Item not found");
 		}
@@ -73,7 +73,7 @@ public class ItemResource {
 			@FormParam("name") String name,
 			@FormParam("face") BigDecimal face,
 			@FormParam("image") String image) {
-		StampItem i = new StampItem();
+		Item i = new Item();
 		i.setSerialNumber(serialNumber);
 		i.setName(name);
 		i.setFace(face);
