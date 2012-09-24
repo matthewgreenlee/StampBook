@@ -11,18 +11,15 @@ import com.goldenpond.stampbook.pojo.Stamps;
 
 public class CatalogManager {
 
-	private static CatalogManager instance = new CatalogManager();
-
 	private StampDao stampDao;
 	private StampItemDao itemDao;
 
-	private CatalogManager() {
-		stampDao = new StampDao();
-		itemDao = new StampItemDao();
+	public void setStampDao(StampDao stampDao) {
+		this.stampDao = stampDao;
 	}
 
-	public static CatalogManager getInstance() {
-		return instance;
+	public void setItemDao(StampItemDao itemDao) {
+		this.itemDao = itemDao;
 	}
 
 	public void add(Stamp stamp) {
