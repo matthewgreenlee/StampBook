@@ -16,26 +16,25 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.goldenpond.stampbook.biz.CatalogManager;
 import com.goldenpond.stampbook.pojo.Stamp;
 import com.sun.jersey.api.NotFoundException;
 
+@Component
+@Path("/stamps/{stampId}")
 @Produces(MediaType.APPLICATION_XML)
 public class StampResource {
 
 	@Context UriInfo uriInfo;
 	@Context Request request;
-	long stampId;
-
-	StampResource(UriInfo uriInfo, Request request, long stampId) {
-		this.uriInfo = uriInfo;
-		this.request = request;
-		this.stampId = stampId;
-	}
+	@Autowired CatalogManager catalogManager;
 
 	@GET
-	public Stamp getStamp() {
-		Stamp s = CatalogManager.getInstance().get(stampId);
+	public Stamp getStamp(@PathParam("stampId") long stampId) {
+		Stamp s = catalogManager.get(stampId);
 		if (s == null) {
 			throw new NotFoundException("Stamp not found");
 		}
@@ -44,13 +43,15 @@ public class StampResource {
 
 	@PUT
 	@Consumes("application/x-www-form-urlencoded")
-	public Response putStamp(@FormParam("issueNumber") String issueNumber,
+	public Response putStamp(
+			@PathParam("stampId") long stampId,
+			@FormParam("issueNumber") String issueNumber,
 			@FormParam("name") String name,
 			@FormParam("type") String type,
 			@FormParam("issueDate") Date issueDate,
 			@FormParam("designedBy") String designedBy,
 			@FormParam("printedBy") String printedBy) {
-		Stamp s = getStamp();
+		Stamp s = getStamp(stampId);
 		if (s != null) {
 			if (issueNumber != null) s.setIssueNumber(issueNumber);
 			if (name != null) s.setName(name);
@@ -58,7 +59,7 @@ public class StampResource {
 			if (issueDate != null) s.setIssueDate(issueDate);
 			if (designedBy != null) s.setDesignedBy(designedBy);
 			if (printedBy != null) s.setPrintedBy(printedBy);
-			CatalogManager.getInstance().modify(s);
+			catalogManager.modify(s);
 			return Response.ok().build();
 		}
 		else {
@@ -68,15 +69,10 @@ public class StampResource {
 	}
 
 	@DELETE
-	public void deleteStamp() {
-		Stamp s = CatalogManager.getInstance().remove(stampId);
+	public void deleteStamp(@PathParam("stampId") long stampId) {
+		Stamp s = catalogManager.remove(stampId);
 		if (s == null) {
 			throw new NotFoundException("Stamp not found");
 		}
-	}
-
-	@Path("{item}")
-	public ItemResource getItemResource(@PathParam("item") String item) {
-		return new ItemResource(uriInfo, request, stampId, item);
 	}
 }

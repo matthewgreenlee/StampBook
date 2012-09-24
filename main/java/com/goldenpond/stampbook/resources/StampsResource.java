@@ -7,12 +7,14 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.biz.CatalogManager;
 import com.goldenpond.stampbook.pojo.Stamp;
@@ -20,19 +22,17 @@ import com.goldenpond.stampbook.pojo.Stamps;
 
 @Path("/stamps")
 @Produces(MediaType.APPLICATION_XML)
+@Component
 public class StampsResource {
 
 	@Context UriInfo uriInfo;
 	@Context Request request;
+	@Autowired CatalogManager catalogManager;
 
-	@Path("{stampId}")
-	public StampResource getStampResource(@PathParam("stampId") long stampId) {
-		return new StampResource(uriInfo, request, stampId);
-	}
 
 	@GET
 	public Stamps getStamps() {
-		return CatalogManager.getInstance().getStamps();
+		return catalogManager.getStamps();
 	}
 
 	@POST
@@ -50,7 +50,7 @@ public class StampsResource {
 		s.setIssueDate(issueDate);
 		s.setDesignedBy(designedBy);
 		s.setPrintedBy(printedBy);
-		CatalogManager.getInstance().add(s);
+		catalogManager.add(s);
 		return s;
 	}
 }

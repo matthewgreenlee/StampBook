@@ -11,7 +11,11 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>Jersey REST Service</servlet-name>
+    <!-- 
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+     -->
+    <!-- use jersey-spring integration servlet -->
+    <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
     <init-param>
       <param-name>com.sun.jersey.config.property.packages</param-name>
       <param-value>com.goldenpond.stampbook.resources</param-value>
@@ -26,7 +30,10 @@
   <!-- configuration for spring -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/services.xml /WEB-INF/daos.xml</param-value>
+    <param-value>
+      /WEB-INF/services.xml
+      /WEB-INF/daos.xml
+    </param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
