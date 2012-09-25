@@ -5,7 +5,7 @@ import java.util.List;
 import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.Item;
 
-public interface ItemDaoI {
+public interface ItemDao {
 
 	public abstract Item addToExistingStamp(Stamp stamp, Item item);
 

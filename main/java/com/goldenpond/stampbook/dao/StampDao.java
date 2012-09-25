@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.goldenpond.stampbook.pojo.Stamp;
 
-public interface StampDaoI {
+public interface StampDao {
 
 	public abstract Stamp create(String issueNumber);
 

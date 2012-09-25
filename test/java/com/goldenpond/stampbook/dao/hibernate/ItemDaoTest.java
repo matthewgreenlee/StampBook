@@ -14,7 +14,7 @@ import com.goldenpond.stampbook.pojo.Item;
 
 public class ItemDaoTest extends TestCase {
 
-	private ItemDao dao = new ItemDao();
+	private ItemDaoImpl dao = new ItemDaoImpl();
 
 	@Before
 	protected void setUp() {

@@ -12,7 +12,7 @@ import com.goldenpond.stampbook.pojo.UserCollection;
 
 @Component
 @Scope("singleton")
-public class UserCollectionDao extends Dao {
+public class UserCollectionDaoImpl extends DaoImpl {
 
 	public List<UserCollection> findAll(long userId) {
 		Session s = getSessionFactory().openSession();

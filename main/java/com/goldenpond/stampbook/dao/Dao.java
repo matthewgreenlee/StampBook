@@ -1,6 +1,6 @@
 package com.goldenpond.stampbook.dao;
 
-public interface DaoI {
+public interface Dao {
 
 	public abstract void update(Object obj);
 

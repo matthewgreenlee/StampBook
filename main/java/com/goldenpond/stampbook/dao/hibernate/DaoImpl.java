@@ -5,10 +5,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.goldenpond.stampbook.dao.DaoI;
+import com.goldenpond.stampbook.dao.Dao;
 
 
-public abstract class Dao implements DaoI {
+public abstract class DaoImpl implements Dao {
 
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.dao.hibernate.ItemDao;
-import com.goldenpond.stampbook.dao.hibernate.StampDao;
+import com.goldenpond.stampbook.dao.hibernate.ItemDaoImpl;
+import com.goldenpond.stampbook.dao.hibernate.StampDaoImpl;
 import com.goldenpond.stampbook.exception.StampBookException;
 import com.goldenpond.stampbook.pojo.Item;
 import com.goldenpond.stampbook.pojo.Stamp;
@@ -17,33 +17,33 @@ import com.goldenpond.stampbook.pojo.Stamps;
 @Scope("singleton")
 public class CatalogManager {
 
-	@Autowired(required=true) StampDao stampDao;
-	@Autowired(required=true) ItemDao itemDao;
+	@Autowired(required=true) StampDaoImpl stampDaoImpl;
+	@Autowired(required=true) ItemDaoImpl itemDaoImpl;
 
 	public void add(Stamp stamp) {
-		stampDao.create(stamp);
+		stampDaoImpl.create(stamp);
 	}
 
 	public List<Stamp> listAll() {
-		return stampDao.findAll();
+		return stampDaoImpl.findAll();
 	}
 
 	public Stamp get(long stampId) {
-		return stampDao.fetchById(stampId);
+		return stampDaoImpl.fetchById(stampId);
 	}
 
 	public void modify(Stamp stamp) {
-		stampDao.update(stamp);
+		stampDaoImpl.update(stamp);
 	}
 
 	public void remove(Stamp stamp) {
-		stampDao.delete(stamp);
+		stampDaoImpl.delete(stamp);
 	}
 
 	public Stamp remove(Long stampId) {
 		Stamp s = get(stampId);
 		if (s == null) return null;
-		stampDao.delete(s);
+		stampDaoImpl.delete(s);
 		return s;
 	}
 
@@ -71,7 +71,7 @@ public class CatalogManager {
 		} else {
 			s.addItem(i);
 		}
-		stampDao.update(s);
+		stampDaoImpl.update(s);
 	}
 
 	public void updateItem(long stampId, Item item) {
@@ -86,13 +86,13 @@ public class CatalogManager {
 		} else {
 			throw new StampBookException("Item not found");
 		}
-		stampDao.update(s);
+		stampDaoImpl.update(s);
 	}
 
 	public void deleteItem(long stampId, String serialNumber) {
 		Item i = getItem(stampId, serialNumber);
 		if (i == null)
 			throw new StampBookException("Item not found");
-		itemDao.delete(i);
+		itemDaoImpl.delete(i);
 	}
 }

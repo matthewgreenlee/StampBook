@@ -13,7 +13,7 @@ import com.goldenpond.stampbook.pojo.Stamp;
 
 public class StampDaoTest extends TestCase {
 
-	private StampDao dao = new StampDao();
+	private StampDaoImpl dao = new StampDaoImpl();
 	private Stamp item = new Stamp();
 	private final long ID = 41;
 
