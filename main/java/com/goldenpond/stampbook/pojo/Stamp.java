@@ -1,7 +1,6 @@
 package com.goldenpond.stampbook.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "STAMP")
 @XmlRootElement
-@XmlType(propOrder={"id", "name", "type", "issueNumber", "issueDate", "designedBy", "printedBy", "items"})
+@XmlType(propOrder={"id", "name", "type", "issueNumber", "items"})
 public class Stamp {
 
 	private long id;
@@ -30,12 +29,6 @@ public class Stamp {
 	private String name;
 
 	private String type;
-
-	private Date issueDate;
-
-	private String designedBy;
-
-	private String printedBy;
 
 	private List<Item> items;
 
@@ -83,33 +76,6 @@ public class Stamp {
 		this.type = type;
 	}
 
-	@Column(name = "ISSUE_DATE")
-	public Date getIssueDate() {
-		return issueDate;
-	}
-
-	public void setIssueDate(Date issueDate) {
-		this.issueDate = issueDate;
-	}
-
-	@Column(name = "DESIGNED_BY")
-	public String getDesignedBy() {
-		return designedBy;
-	}
-
-	public void setDesignedBy(String designedBy) {
-		this.designedBy = designedBy;
-	}
-
-	@Column(name = "PRINTED_BY")
-	public String getPrintedBy() {
-		return printedBy;
-	}
-
-	public void setPrintedBy(String printedBy) {
-		this.printedBy = printedBy;
-	}
-
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="stamp")
 	@XmlElement(name="item")
 	public List<Item> getItems() {
@@ -118,14 +84,6 @@ public class Stamp {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
-	}
-
-	@Override
-	public String toString() {
-		return "Stamp [id=" + id + ", issueNumber=" + issueNumber + ", name="
-				+ name + ", issueDate=" + issueDate + ", designedBy="
-				+ designedBy + ", printedBy=" + printedBy + ", items=" + items
-				+ "]";
 	}
 
 	public Item getItem(String serialNumber) {

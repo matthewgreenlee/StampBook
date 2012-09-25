@@ -3,7 +3,6 @@ package com.goldenpond.stampbook.biz;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -32,9 +31,6 @@ public class CatalogManagerTest {
 		stamp = new Stamp();
 		stamp.setIssueNumber("2012-" + new Random().nextInt(100));
 		stamp.setName("a name");
-		stamp.setIssueDate(new Date());
-		stamp.setDesignedBy("a designer");
-		stamp.setPrintedBy("a printer");
 	}
 
 	@Test
@@ -65,13 +61,6 @@ public class CatalogManagerTest {
 	@Test(expected = HibernateException.class)
 	public void testGetNonExistant() {
 		manager.get(nonExistentId);
-	}
-
-	@Test
-	public void testModifyIssueDate() {
-		stamp = manager.get(existingId);
-		stamp.setIssueDate(new Date());
-		manager.modify(stamp);
 	}
 
 	@Test(expected = HibernateException.class)

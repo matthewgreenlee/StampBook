@@ -1,7 +1,5 @@
 package com.goldenpond.stampbook.resources;
 
-import java.util.Date;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -47,18 +45,12 @@ public class StampResource {
 			@PathParam("stampId") long stampId,
 			@FormParam("issueNumber") String issueNumber,
 			@FormParam("name") String name,
-			@FormParam("type") String type,
-			@FormParam("issueDate") Date issueDate,
-			@FormParam("designedBy") String designedBy,
-			@FormParam("printedBy") String printedBy) {
+			@FormParam("type") String type) {
 		Stamp s = getStamp(stampId);
 		if (s != null) {
 			if (issueNumber != null) s.setIssueNumber(issueNumber);
 			if (name != null) s.setName(name);
 			if (type != null) s.setType(type);
-			if (issueDate != null) s.setIssueDate(issueDate);
-			if (designedBy != null) s.setDesignedBy(designedBy);
-			if (printedBy != null) s.setPrintedBy(printedBy);
 			catalogManager.modify(s);
 			return Response.ok().build();
 		}

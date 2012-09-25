@@ -1,6 +1,5 @@
 package com.goldenpond.stampbook.hibernate;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -27,9 +26,6 @@ public class StampDaoTest extends TestCase {
 	public void testCreateWithNothingReturn() {
 		item.setIssueNumber("2012-04");
 		item.setName("a name");
-		item.setIssueDate(new Date());
-		item.setDesignedBy("a designer");
-		item.setPrintedBy("a printer");
 		dao.create(item);
 	}
 
@@ -42,9 +38,6 @@ public class StampDaoTest extends TestCase {
 		assertNotNull(item.getId());
 		assertEquals(randomIssueNumber, item.getIssueNumber());
 		assertNull(item.getName());
-		assertNull(item.getIssueDate());
-		assertNull(item.getDesignedBy());
-		assertNull(item.getPrintedBy());
 	}
 
 	@Test
@@ -52,8 +45,6 @@ public class StampDaoTest extends TestCase {
 		Stamp fetched = dao.fetchById(ID);
 		assertEquals(ID, fetched.getId());
 		assertEquals("2012-04", fetched.getIssueNumber());
-		assertEquals("a designer", fetched.getDesignedBy());
-		assertEquals("a printer", fetched.getPrintedBy());
 	}
 
 	@Test
@@ -61,8 +52,6 @@ public class StampDaoTest extends TestCase {
 		item.setId(ID);
 		item.setIssueNumber("2012-05");
 		item.setName("a name");
-		item.setDesignedBy("another designer");
-		item.setPrintedBy("another printer");
 		dao.update(item);
 	}
 
