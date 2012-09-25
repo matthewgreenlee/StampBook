@@ -7,6 +7,6 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="com.goldenpond.stampbook.resources, com.goldenpond.stampbook.biz, com.goldenpond.stampbook.hibernate"></context:component-scan>
+	<context:component-scan base-package="com.goldenpond.stampbook.resources, com.goldenpond.stampbook.services, com.goldenpond.stampbook.dao.hibernate"></context:component-scan>
 
 </beans>

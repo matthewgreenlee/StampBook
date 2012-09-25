@@ -33,7 +33,7 @@
 
  		<mapping class="com.goldenpond.stampbook.pojo.Stamp"/>
  		<mapping class="com.goldenpond.stampbook.pojo.Item"/>
- 		<mapping class="com.goldenpond.stampbook.pojo.UserCollection"/>
+ 		<mapping class="com.goldenpond.stampbook.pojo.Collection"/>
     </session-factory>
 
 </hibernate-configuration>
