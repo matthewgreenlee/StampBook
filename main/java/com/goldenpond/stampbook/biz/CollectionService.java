@@ -2,66 +2,58 @@ package com.goldenpond.stampbook.biz;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.goldenpond.stampbook.hibernate.UserCollectionDao;
 import com.goldenpond.stampbook.pojo.UserCollection;
 
+@Component
+@Scope("singleton")
 public class CollectionService {
 
-	private static CollectionService instance = new CollectionService();
-
-	private UserCollectionDao dao;
-
-	private CollectionService() {
-		dao = new UserCollectionDao();
-	}
-
-	public static CollectionService getInstance() {
-		return instance;
-	}
-
-	public void setDao(UserCollectionDao dao) {
-		this.dao = dao;
-	}
+	@Autowired(required=true) UserCollectionDao userCollectionDao;
 
 	public UserCollectionDao getUserCollectionDao() {
-		return dao;
+		return userCollectionDao;
 	}
 
 	public void setUserCollectionDao(UserCollectionDao userCollectionDao) {
-		this.dao = userCollectionDao;
+		this.userCollectionDao = userCollectionDao;
 	}
 
 	public void add(UserCollection userCollection) {
-		dao.create(userCollection);
+		userCollectionDao.create(userCollection);
 	}
 
 	public void remove(UserCollection userCollection) {
-		dao.delete(userCollection);
+		userCollectionDao.delete(userCollection);
 	}
 
 	public void modify(UserCollection userCollection) {
-		dao.update(userCollection);
+		userCollectionDao.update(userCollection);
 	}
 
 	public List<UserCollection> getCollections(long userId) {
-		return dao.findAll(userId);
+		return userCollectionDao.findAll(userId);
 	}
 
 	public UserCollection add(long userId, long stampItemId) {
 		UserCollection uc = new UserCollection();
 		uc.setUserId(userId);
 		uc.setStampItemId(stampItemId);
-		dao.create(uc);
+		userCollectionDao.create(uc);
 		return uc;
 	}
 
 	public UserCollection remove(long userId, long stampItemId) {
 		UserCollection uc = get(userId, stampItemId);
-		dao.delete(uc);
+		userCollectionDao.delete(uc);
 		return uc;
 	}
 
 	public UserCollection get(long userId, long stampItemId) {
-		return dao.get(userId, stampItemId);
+		return userCollectionDao.get(userId, stampItemId);
 	}
 }

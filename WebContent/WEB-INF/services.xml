@@ -9,8 +9,4 @@
 
 	<context:component-scan base-package="com.goldenpond.stampbook.resources, com.goldenpond.stampbook.biz, com.goldenpond.stampbook.hibernate"></context:component-scan>
 
-	<bean id="collectionService" class="com.goldenpond.stampbook.biz.CollectionService" scope="singleton">
-		<property name="userCollectionDao" ref="userCollectionDao"></property>
-	</bean>
-
 </beans>
