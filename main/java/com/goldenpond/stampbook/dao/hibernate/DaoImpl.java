@@ -4,13 +4,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.goldenpond.stampbook.dao.Dao;
 
 
 public abstract class DaoImpl implements Dao {
 
-	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	@Autowired SessionFactory sessionFactory;
 
 	protected SessionFactory getSessionFactory() {
 		return sessionFactory;

@@ -19,7 +19,7 @@ public class CollectionDaoImpl extends DaoImpl implements CollectionDao {
 	public List<Collection> findAll(long userId) {
 		Session s = getSessionFactory().openSession();
 		Transaction tx = s.beginTransaction();
-		Query q = s.createQuery("from UserCollection");
+		Query q = s.createQuery("from Collection");
 		List uc = q.list();
 		tx.commit();
 		return uc;
