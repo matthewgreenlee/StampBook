@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook.biz;
+package com.goldenpond.stampbook.services;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
