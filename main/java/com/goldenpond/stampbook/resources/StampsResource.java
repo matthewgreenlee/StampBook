@@ -14,9 +14,9 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.biz.CatalogManager;
 import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.Stamps;
+import com.goldenpond.stampbook.services.CatalogService;
 
 @Path("/stamps")
 @Produces(MediaType.APPLICATION_XML)
@@ -25,12 +25,12 @@ public class StampsResource {
 
 	@Context UriInfo uriInfo;
 	@Context Request request;
-	@Autowired CatalogManager catalogManager;
+	@Autowired CatalogService catalogService;
 
 
 	@GET
 	public Stamps getStamps() {
-		return catalogManager.getStamps();
+		return catalogService.getStamps();
 	}
 
 	@POST
@@ -43,7 +43,7 @@ public class StampsResource {
 		s.setIssueNumber(issueNumber);
 		s.setName(name);
 		s.setType(type);
-		catalogManager.add(s);
+		catalogService.add(s);
 		return s;
 	}
 }

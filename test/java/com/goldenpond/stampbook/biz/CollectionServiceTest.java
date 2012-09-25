@@ -8,7 +8,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.goldenpond.stampbook.pojo.UserCollection;
+import com.goldenpond.stampbook.pojo.Collection;
+import com.goldenpond.stampbook.services.CollectionService;
 
 public class CollectionServiceTest {
 
@@ -22,11 +23,11 @@ public class CollectionServiceTest {
 
 	@Test
 	public void testAdd() {
-		UserCollection userCollection = new UserCollection();
-		userCollection.setUserId(Long.valueOf(1));
-		userCollection.setStampItemId(Long.valueOf(1));
-		service.add(userCollection);
-		assertNotNull(userCollection.getId());
+		Collection collection = new Collection();
+		collection.setUserId(Long.valueOf(1));
+		collection.setStampItemId(Long.valueOf(1));
+		service.add(collection);
+		assertNotNull(collection.getId());
 	}
 
 	@Test

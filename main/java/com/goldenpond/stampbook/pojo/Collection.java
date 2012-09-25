@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "USER_COLLECTION")
 @XmlRootElement
-public class UserCollection {
+public class Collection {
 
 	private Long id;
 

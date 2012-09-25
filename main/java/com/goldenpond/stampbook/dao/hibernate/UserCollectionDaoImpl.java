@@ -8,13 +8,13 @@ import org.hibernate.Transaction;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.pojo.UserCollection;
+import com.goldenpond.stampbook.pojo.Collection;
 
 @Component
 @Scope("singleton")
 public class UserCollectionDaoImpl extends DaoImpl {
 
-	public List<UserCollection> findAll(long userId) {
+	public List<Collection> findAll(long userId) {
 		Session s = getSessionFactory().openSession();
 		Transaction tx = s.beginTransaction();
 		Query q = s.createQuery("from UserCollection");
@@ -23,7 +23,7 @@ public class UserCollectionDaoImpl extends DaoImpl {
 		return uc;
 	}
 
-	public UserCollection get(long userId, long stampItemId) {
+	public Collection get(long userId, long stampItemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

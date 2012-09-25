@@ -9,30 +9,30 @@ import javax.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.biz.CollectionService;
-import com.goldenpond.stampbook.pojo.UserCollection;
+import com.goldenpond.stampbook.pojo.Collection;
+import com.goldenpond.stampbook.services.CollectionService;
 
 @Path("users")
 @Component
-public class UserCollectionResource {
+public class CollectionResource {
 
 	@Autowired CollectionService collectionService;
 
 	@POST
 	@Path("getCollections")
-	public List<UserCollection> getCollections(@FormParam("userId") long userId) {
+	public List<Collection> getCollections(@FormParam("userId") long userId) {
 		return collectionService.getCollections(userId);
 	}
 
 	@POST
 	@Path("addCollection")
-	public UserCollection addCollection(@FormParam("userId") long userId, @FormParam("stampItemId") long stampItemId) {
+	public Collection addCollection(@FormParam("userId") long userId, @FormParam("stampItemId") long stampItemId) {
 		return collectionService.add(userId, stampItemId);
 	}
 
 	@POST
 	@Path("removeCollection")
-	public UserCollection removeCollection(@FormParam("userId") long userId, @FormParam("stampItemId") long stampItemId) {
+	public Collection removeCollection(@FormParam("userId") long userId, @FormParam("stampItemId") long stampItemId) {
 		return collectionService.remove(userId, stampItemId);
 	}
 }

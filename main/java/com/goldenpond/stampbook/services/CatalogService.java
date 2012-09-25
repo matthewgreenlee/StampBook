@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook.biz;
+package com.goldenpond.stampbook.services;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.goldenpond.stampbook.pojo.Stamps;
 
 @Component
 @Scope("singleton")
-public class CatalogManager {
+public class CatalogService {
 
 	@Autowired(required=true) StampDaoImpl stampDaoImpl;
 	@Autowired(required=true) ItemDaoImpl itemDaoImpl;

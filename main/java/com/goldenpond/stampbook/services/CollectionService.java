@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook.biz;
+package com.goldenpond.stampbook.services;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.dao.hibernate.UserCollectionDaoImpl;
-import com.goldenpond.stampbook.pojo.UserCollection;
+import com.goldenpond.stampbook.pojo.Collection;
 
 @Component
 @Scope("singleton")
@@ -23,37 +23,37 @@ public class CollectionService {
 		this.userCollectionDaoImpl = userCollectionDaoImpl;
 	}
 
-	public void add(UserCollection userCollection) {
-		userCollectionDaoImpl.create(userCollection);
+	public void add(Collection collection) {
+		userCollectionDaoImpl.create(collection);
 	}
 
-	public void remove(UserCollection userCollection) {
-		userCollectionDaoImpl.delete(userCollection);
+	public void remove(Collection collection) {
+		userCollectionDaoImpl.delete(collection);
 	}
 
-	public void modify(UserCollection userCollection) {
-		userCollectionDaoImpl.update(userCollection);
+	public void modify(Collection collection) {
+		userCollectionDaoImpl.update(collection);
 	}
 
-	public List<UserCollection> getCollections(long userId) {
+	public List<Collection> getCollections(long userId) {
 		return userCollectionDaoImpl.findAll(userId);
 	}
 
-	public UserCollection add(long userId, long stampItemId) {
-		UserCollection uc = new UserCollection();
+	public Collection add(long userId, long stampItemId) {
+		Collection uc = new Collection();
 		uc.setUserId(userId);
 		uc.setStampItemId(stampItemId);
 		userCollectionDaoImpl.create(uc);
 		return uc;
 	}
 
-	public UserCollection remove(long userId, long stampItemId) {
-		UserCollection uc = get(userId, stampItemId);
+	public Collection remove(long userId, long stampItemId) {
+		Collection uc = get(userId, stampItemId);
 		userCollectionDaoImpl.delete(uc);
 		return uc;
 	}
 
-	public UserCollection get(long userId, long stampItemId) {
+	public Collection get(long userId, long stampItemId) {
 		return userCollectionDaoImpl.get(userId, stampItemId);
 	}
 }

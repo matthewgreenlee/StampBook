@@ -14,11 +14,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.services.CatalogService;
 
-public class CatalogManagerTest {
+public class CatalogServiceTest {
 
 	private ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"services.xml", "daos.xml"});
-	private CatalogManager manager;
+	private CatalogService manager;
 	private Stamp stamp;
 
 	private static final Long existingId = Long.valueOf(1);
@@ -27,7 +28,7 @@ public class CatalogManagerTest {
 
 	@Before
 	public void setUp() {
-		manager = ctx.getBean(CatalogManager.class);
+		manager = ctx.getBean(CatalogService.class);
 		stamp = new Stamp();
 		stamp.setIssueNumber("2012-" + new Random().nextInt(100));
 		stamp.setName("a name");
