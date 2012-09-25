@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook.hibernate;
+package com.goldenpond.stampbook.dao.hibernate;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

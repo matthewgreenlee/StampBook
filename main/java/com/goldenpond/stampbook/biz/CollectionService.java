@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.hibernate.UserCollectionDao;
+import com.goldenpond.stampbook.dao.hibernate.UserCollectionDao;
 import com.goldenpond.stampbook.pojo.UserCollection;
 
 @Component

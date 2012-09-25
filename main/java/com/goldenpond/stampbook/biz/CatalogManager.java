@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.goldenpond.stampbook.dao.hibernate.ItemDao;
+import com.goldenpond.stampbook.dao.hibernate.StampDao;
 import com.goldenpond.stampbook.exception.StampBookException;
-import com.goldenpond.stampbook.hibernate.ItemDao;
-import com.goldenpond.stampbook.hibernate.StampDao;
 import com.goldenpond.stampbook.pojo.Item;
 import com.goldenpond.stampbook.pojo.Stamp;
 import com.goldenpond.stampbook.pojo.Stamps;

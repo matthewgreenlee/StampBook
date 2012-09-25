@@ -1,4 +1,4 @@
-package com.goldenpond.stampbook.hibernate;
+package com.goldenpond.stampbook.dao.hibernate;
 
 import java.util.List;
 import java.util.Random;
