@@ -11,7 +11,6 @@ import com.goldenpond.stampbook.dao.Dao;
 
 public abstract class DaoImpl implements Dao {
 
-//	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	@Autowired SessionFactory sessionFactory;
 
 	protected SessionFactory getSessionFactory() {

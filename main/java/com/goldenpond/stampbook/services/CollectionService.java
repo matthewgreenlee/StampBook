@@ -15,37 +15,21 @@ public class CollectionService {
 
 	@Autowired(required=true) CollectionDaoImpl collectionDaoImpl;
 
+	public List<Collection> getAll(long userId) {
+		return collectionDaoImpl.findAll(userId);
+	}
+
 	public void add(Collection collection) {
 		collectionDaoImpl.create(collection);
 	}
 
-	public void remove(Collection collection) {
-		collectionDaoImpl.delete(collection);
+	public Collection remove(long userId, long itemId) {
+		Collection c = get(userId, itemId);
+		collectionDaoImpl.delete(c);
+		return c;
 	}
 
-	public void modify(Collection collection) {
-		collectionDaoImpl.update(collection);
-	}
-
-	public List<Collection> getCollections(long userId) {
-		return collectionDaoImpl.findAll(userId);
-	}
-
-	public Collection add(long userId, long itemId) {
-		Collection uc = new Collection();
-		uc.setUserId(userId);
-		uc.setItemId(itemId);
-		collectionDaoImpl.create(uc);
-		return uc;
-	}
-
-	public Collection remove(long userId, long stampItemId) {
-		Collection uc = get(userId, stampItemId);
-		collectionDaoImpl.delete(uc);
-		return uc;
-	}
-
-	public Collection get(long userId, long stampItemId) {
-		return collectionDaoImpl.get(userId, stampItemId);
+	public Collection get(long userId, long itemId) {
+		return collectionDaoImpl.get(userId, itemId);
 	}
 }

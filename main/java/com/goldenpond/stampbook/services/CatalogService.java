@@ -21,7 +21,15 @@ public class CatalogService {
 	@Autowired(required=true) ItemDaoImpl itemDaoImpl;
 
 	public void add(Stamp stamp) {
-		stampDaoImpl.create(stamp);
+		if (get(stamp.getIssueNumber()) != null) {
+			throw new StampBookException("IssueNumber already exists");
+		}
+		try {
+			stampDaoImpl.create(stamp);
+		}
+		catch (Exception e) {
+			throw new StampBookException(e);
+		}
 	}
 
 	public List<Stamp> listAll() {
@@ -30,6 +38,10 @@ public class CatalogService {
 
 	public Stamp get(long stampId) {
 		return stampDaoImpl.fetchById(stampId);
+	}
+
+	public Stamp get(String issueNumber) {
+		return stampDaoImpl.fetchByIssueNumber(issueNumber);
 	}
 
 	public void modify(Stamp stamp) {

@@ -63,6 +63,7 @@ public class Collection {
 		this.postmarked = postmarked;
 	}
 
+	@Column(name = "GRADE")
 	public Integer getGrade() {
 		return grade;
 	}

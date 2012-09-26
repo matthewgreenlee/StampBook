@@ -20,19 +20,39 @@ public class CollectionResource {
 
 	@POST
 	@Path("getCollections")
-	public List<Collection> getCollections(@FormParam("userId") long userId) {
-		return collectionService.getCollections(userId);
+	public List<Collection> getAll(@FormParam("userId") long userId) {
+		return collectionService.getAll(userId);
 	}
 
 	@POST
 	@Path("addCollection")
-	public Collection addCollection(@FormParam("userId") long userId, @FormParam("itemId") long itemId) {
-		return collectionService.add(userId, itemId);
+	public Collection add(
+			@FormParam("userId") long userId,
+			@FormParam("itemId") long itemId,
+			@FormParam("postmarked") boolean postmarked,
+			@FormParam("grade") int grade) {
+		Collection c = new Collection();
+		c.setUserId(userId);
+		c.setItemId(itemId);
+		c.setPostmarked(postmarked);
+		c.setGrade(grade);
+		collectionService.add(c);
+		return c;
 	}
 
 	@POST
 	@Path("removeCollection")
-	public Collection removeCollection(@FormParam("userId") long userId, @FormParam("itemId") long itemId) {
+	public Collection remove(
+			@FormParam("userId") long userId,
+			@FormParam("itemId") long itemId) {
 		return collectionService.remove(userId, itemId);
+	}
+
+	@POST
+	@Path("getCollection")
+	public Collection get(
+			@FormParam("userId") long userId,
+			@FormParam("itemId") long itemId) {
+		return collectionService.get(userId, itemId);
 	}
 }

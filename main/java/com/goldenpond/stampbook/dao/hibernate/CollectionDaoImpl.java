@@ -27,8 +27,13 @@ public class CollectionDaoImpl extends DaoImpl implements CollectionDao {
 
 	@Override
 	public Collection get(long userId, long itemId) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = getSessionFactory().openSession();
+		Transaction tx = s.beginTransaction();
+		Query q = s.createQuery("from Collection where USER_ID = :userId and ITEM_ID = :itemId");
+		q.setParameter("userId", userId);
+		q.setParameter("itemId", itemId);
+		Collection c = (Collection) q.uniqueResult();
+		return c;
 	}
 
 }
