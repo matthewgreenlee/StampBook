@@ -25,7 +25,7 @@ public class CollectionServiceTest {
 	public void testAdd() {
 		Collection collection = new Collection();
 		collection.setUserId(Long.valueOf(1));
-		collection.setStampItemId(Long.valueOf(1));
+		collection.setItemId(Long.valueOf(1));
 		service.add(collection);
 		assertNotNull(collection.getId());
 	}

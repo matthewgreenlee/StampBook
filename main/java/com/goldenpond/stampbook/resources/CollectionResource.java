@@ -26,13 +26,13 @@ public class CollectionResource {
 
 	@POST
 	@Path("addCollection")
-	public Collection addCollection(@FormParam("userId") long userId, @FormParam("stampItemId") long stampItemId) {
-		return collectionService.add(userId, stampItemId);
+	public Collection addCollection(@FormParam("userId") long userId, @FormParam("itemId") long itemId) {
+		return collectionService.add(userId, itemId);
 	}
 
 	@POST
 	@Path("removeCollection")
-	public Collection removeCollection(@FormParam("userId") long userId, @FormParam("stampItemId") long stampItemId) {
-		return collectionService.remove(userId, stampItemId);
+	public Collection removeCollection(@FormParam("userId") long userId, @FormParam("itemId") long itemId) {
+		return collectionService.remove(userId, itemId);
 	}
 }

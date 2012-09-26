@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "USER_COLLECTION")
+@Table(name = "COLLECTION")
 @XmlRootElement
 public class Collection {
 
@@ -18,14 +18,14 @@ public class Collection {
 
 	private Long userId;
 
-	private Long stampItemId;
+	private Long itemId;
 
 	private boolean postmarked;
 
 	private Integer grade;
 
 	@Id
-	@Column(name = "USER_COLLECTION_ID")
+	@Column(name = "COLLECTION_ID")
 	@GeneratedValue(generator="native")
 	@GenericGenerator(name="native", strategy = "native")
 	public Long getId() {
@@ -45,13 +45,13 @@ public class Collection {
 		this.userId = userId;
 	}
 
-	@Column(name = "STAMP_ITEM_ID")
-	public Long getStampItemId() {
-		return stampItemId;
+	@Column(name = "ITEM_ID")
+	public Long getItemId() {
+		return itemId;
 	}
 
-	public void setStampItemId(Long stampItemId) {
-		this.stampItemId = stampItemId;
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
 	}
 
 	@Column(name = "POSTMARKED")

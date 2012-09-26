@@ -48,7 +48,7 @@ public class ItemDaoImpl extends DaoImpl implements ItemDao {
 		List<Item> items = null;
 		try {
 			tx = session.beginTransaction();
-			Query q = session.createQuery("from StampItem " +
+			Query q = session.createQuery("from Item " +
 					"where STAMP_ID = :stampId"
 					);
 			q.setParameter("stampId", stamp.getId());
@@ -96,7 +96,7 @@ public class ItemDaoImpl extends DaoImpl implements ItemDao {
 			Query q = session.createQuery("from Stamp where ISSUE_NUMBER = :issueNumber");
 			q.setParameter("issueNumber", issueNumber);
 			Stamp stamp = (Stamp) q.uniqueResult();
-			q = session.createQuery("from StampItem where SERIAL_NUMBER = :serialNumber and STAMP_ID = :stampId");
+			q = session.createQuery("from Item where SERIAL_NUMBER = :serialNumber and STAMP_ID = :stampId");
 			q.setParameter("serialNumber", serialNumber);
 			q.setParameter("stampId", stamp.getId());
 			item = (Item) q.uniqueResult();

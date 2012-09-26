@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.dao.CollectionDao;
 import com.goldenpond.stampbook.dao.hibernate.CollectionDaoImpl;
 import com.goldenpond.stampbook.pojo.Collection;
 
@@ -15,14 +14,6 @@ import com.goldenpond.stampbook.pojo.Collection;
 public class CollectionService {
 
 	@Autowired(required=true) CollectionDaoImpl collectionDaoImpl;
-
-	public CollectionDao getUserCollectionDao() {
-		return collectionDaoImpl;
-	}
-
-	public void setUserCollectionDao(CollectionDaoImpl collectionDaoImpl) {
-		this.collectionDaoImpl = collectionDaoImpl;
-	}
 
 	public void add(Collection collection) {
 		collectionDaoImpl.create(collection);
@@ -40,10 +31,10 @@ public class CollectionService {
 		return collectionDaoImpl.findAll(userId);
 	}
 
-	public Collection add(long userId, long stampItemId) {
+	public Collection add(long userId, long itemId) {
 		Collection uc = new Collection();
 		uc.setUserId(userId);
-		uc.setStampItemId(stampItemId);
+		uc.setItemId(itemId);
 		collectionDaoImpl.create(uc);
 		return uc;
 	}

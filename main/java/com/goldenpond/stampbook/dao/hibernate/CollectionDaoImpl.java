@@ -26,7 +26,7 @@ public class CollectionDaoImpl extends DaoImpl implements CollectionDao {
 	}
 
 	@Override
-	public Collection get(long userId, long stampItemId) {
+	public Collection get(long userId, long itemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

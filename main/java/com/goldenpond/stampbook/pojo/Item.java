@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "STAMP_ITEM")
+@Table(name = "ITEM")
 @XmlRootElement(name = "item")
 @XmlType(propOrder = { "serialNumber", "name", "face", "image" })
 public class Item {
@@ -38,7 +38,7 @@ public class Item {
 	}
 
 	@Id
-	@Column(name = "STAMP_ITEM_ID")
+	@Column(name = "ITEM_ID")
 	@GeneratedValue(generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	@XmlTransient
