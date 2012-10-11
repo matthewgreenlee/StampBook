@@ -40,6 +40,7 @@ public class ItemDaoImpl extends DaoImpl implements ItemDao {
 		return item;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Item> fetchItems(Stamp stamp) {
 

@@ -70,6 +70,7 @@ public class StampDaoImpl extends DaoImpl implements StampDao {
 		return selected;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Stamp> findAll() {
 

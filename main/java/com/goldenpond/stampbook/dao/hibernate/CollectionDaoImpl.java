@@ -15,12 +15,13 @@ import com.goldenpond.stampbook.pojo.Collection;
 @Scope("singleton")
 public class CollectionDaoImpl extends DaoImpl implements CollectionDao {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Collection> findAll(long userId) {
 		Session s = getSessionFactory().openSession();
 		Transaction tx = s.beginTransaction();
 		Query q = s.createQuery("from Collection");
-		List uc = q.list();
+		List<Collection> uc = q.list();
 		tx.commit();
 		return uc;
 	}
@@ -33,6 +34,7 @@ public class CollectionDaoImpl extends DaoImpl implements CollectionDao {
 		q.setParameter("userId", userId);
 		q.setParameter("itemId", itemId);
 		Collection c = (Collection) q.uniqueResult();
+		tx.commit();
 		return c;
 	}
 
