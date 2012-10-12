@@ -1,10 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>StampBook - Home</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>StampBook - Home</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script>
+	getStamps=function() {
+		var jqxhr = $.ajax({
+			url: "./rest/stamps/1",
+			data: null,
+			success: function() {
+				var stampDoc = $.parseXML(jqxhr.responseText);
+				var issueNumber = $(stampDoc).find("issueNumber");
+				$("body").append($(issueNumber).text());
+				console.log(jqxhr.responseText);
+				},
+			dataType: "xml"
+		});
+	};
+	</script>
 </head>
 <body>
-StampBook - Home Page
+	StampBook - Home Page
+	<input type="button" onclick="getStamps()" value="show catalog">
 </body>
 </html>
