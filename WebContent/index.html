@@ -4,24 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>StampBook - Home</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script>
-	getStamps=function() {
-		var jqxhr = $.ajax({
-			url: "./rest/stamps/1",
-			data: null,
-			success: function() {
-				var stampDoc = $.parseXML(jqxhr.responseText);
-				var issueNumber = $(stampDoc).find("issueNumber");
-				$("body").append($(issueNumber).text());
-				console.log(jqxhr.responseText);
-				},
-			dataType: "xml"
-		});
-	};
-	</script>
+	<script type="text/javascript" src="catalog.js"></script>
 </head>
 <body>
 	StampBook - Home Page
 	<input type="button" onclick="getStamps()" value="show catalog">
+	<div id="CatalogArea"></div>
 </body>
 </html>
