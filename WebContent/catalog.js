@@ -1,13 +1,16 @@
+$(function() {
+	getStamps();
+});
+
 getStamps = function() {
-	var jqxhr = $.ajax({
-		url : "./rest/stamps/1",
-		data : null,
-		success : function() {
-			var stampDoc = $.parseXML(jqxhr.responseText);
-			var issueNumber = $(stampDoc).find("issueNumber");
-			$("#CatalogArea").append($(issueNumber).text());
-			console.log(jqxhr.responseText);
-		},
-		dataType : "xml"
-	});
+    $.ajax({
+        url: "rest/stamps",
+        dataType: "json",
+        success: function(response) {
+            var resp = response.stamp;
+            jQuery.each(resp, function(i, data) {
+                $("#CatalogArea").append("<tr><td>" + data.issueNumber + "</td><td>" + data.name + "</td></tr>");
+            });
+        }
+    });
 };
