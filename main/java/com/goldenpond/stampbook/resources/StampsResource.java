@@ -19,7 +19,7 @@ import com.goldenpond.stampbook.pojo.Stamps;
 import com.goldenpond.stampbook.services.CatalogService;
 
 @Path("/stamps")
-@Produces(MediaType.APPLICATION_XML)
+@Produces(MediaType.APPLICATION_JSON)
 @Component
 public class StampsResource {
 
