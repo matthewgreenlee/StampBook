@@ -14,3 +14,18 @@ getStamps = function() {
         }
     });
 };
+
+addStamp = function() {
+    $.ajax({
+    	url: "rest/stamps",
+    	type: "POST",
+    	data: {
+    		issueNumber: $("#issueNumber").val(),
+    		name: $("#name").val(),
+    		type: $("#type").val()
+    	},
+    	success: function() {
+    	    alert("addition done");    		
+    	}
+    });
+};
