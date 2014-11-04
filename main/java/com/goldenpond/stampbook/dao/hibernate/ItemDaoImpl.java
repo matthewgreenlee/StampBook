@@ -11,23 +11,23 @@ import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.dao.ItemDao;
 import com.goldenpond.stampbook.pojo.Item;
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 
 @Component
 @Scope("singleton")
 public class ItemDaoImpl extends DaoImpl implements ItemDao {
 
 	@Override
-	public Item addToExistingStamp(Stamp stamp, Item item) {
+	public Item addToExistingStamp(StampVO stampVO, Item item) {
 
-		item.setStamp(stamp);
-		stamp.getItems().add(item);
+		item.setStamp(stampVO);
+		stampVO.getItems().add(item);
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.update(stamp);
+			session.update(stampVO);
 			tx.commit();
 		}
 		catch (HibernateException he) {
@@ -42,7 +42,7 @@ public class ItemDaoImpl extends DaoImpl implements ItemDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Item> fetchItems(Stamp stamp) {
+	public List<Item> fetchItems(StampVO stampVO) {
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
@@ -52,7 +52,7 @@ public class ItemDaoImpl extends DaoImpl implements ItemDao {
 			Query q = session.createQuery("from Item " +
 					"where STAMP_ID = :stampId"
 					);
-			q.setParameter("stampId", stamp.getId());
+			q.setParameter("stampId", stampVO.getId());
 			items = q.list();
 			tx.commit();
 		}
@@ -66,15 +66,15 @@ public class ItemDaoImpl extends DaoImpl implements ItemDao {
 	}
 
 	@Override
-	public void removeFromExistingStamp(Stamp stamp, Item item) {
+	public void removeFromExistingStamp(StampVO stampVO, Item item) {
 
-		stamp.getItems().remove(item);
+		stampVO.getItems().remove(item);
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.update(stamp);
+			session.update(stampVO);
 			tx.commit();
 		}
 		catch (HibernateException he) {
@@ -96,10 +96,10 @@ public class ItemDaoImpl extends DaoImpl implements ItemDao {
 			tx = session.beginTransaction();
 			Query q = session.createQuery("from Stamp where ISSUE_NUMBER = :issueNumber");
 			q.setParameter("issueNumber", issueNumber);
-			Stamp stamp = (Stamp) q.uniqueResult();
+			StampVO stampVO = (StampVO) q.uniqueResult();
 			q = session.createQuery("from Item where SERIAL_NUMBER = :serialNumber and STAMP_ID = :stampId");
 			q.setParameter("serialNumber", serialNumber);
-			q.setParameter("stampId", stamp.getId());
+			q.setParameter("stampId", stampVO.getId());
 			item = (Item) q.uniqueResult();
 			tx.commit();
 		}

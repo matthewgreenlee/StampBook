@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 import com.goldenpond.stampbook.pojo.Item;
 
 public class ItemDaoTest extends TestCase {
@@ -23,7 +23,7 @@ public class ItemDaoTest extends TestCase {
 
 	@Test
 	public void testAddToExistingStamp() {
-		Stamp existingStamp = new Stamp();
+		StampVO existingStamp = new StampVO();
 		existingStamp.setId(8);
 		existingStamp.setIssueNumber("2012-02");
 		existingStamp.setItems(new ArrayList<Item>());
@@ -35,9 +35,9 @@ public class ItemDaoTest extends TestCase {
 
 	@Test
 	public void testFetchAll() {
-		Stamp stamp = new Stamp();
-		stamp.setId(8);
-		List<Item> items = dao.fetchItems(stamp);
+		StampVO stampVO = new StampVO();
+		stampVO.setId(8);
+		List<Item> items = dao.fetchItems(stampVO);
 		assertNotNull(items);
 		assertEquals(5, items.size());
 	}

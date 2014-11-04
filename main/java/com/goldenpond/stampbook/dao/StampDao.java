@@ -2,16 +2,16 @@ package com.goldenpond.stampbook.dao;
 
 import java.util.List;
 
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 
 public interface StampDao {
 
-	public abstract Stamp create(String issueNumber);
+	public abstract StampVO create(String issueNumber);
 
-	public abstract Stamp fetchById(long id);
+	public abstract StampVO fetchById(long id);
 
-	public abstract List<Stamp> findAll();
+	public abstract List<StampVO> findAll();
 
-	public abstract Stamp fetchByIssueNumber(String issueNumber);
+	public abstract StampVO fetchByIssueNumber(String issueNumber);
 
 }

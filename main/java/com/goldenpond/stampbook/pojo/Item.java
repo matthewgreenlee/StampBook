@@ -31,7 +31,7 @@ public class Item {
 
 	private String image;
 
-	private Stamp stamp;
+	private StampVO stampVO;
 
 	public Item() {
 		super();
@@ -89,11 +89,11 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name = "STAMP_ID", nullable=false)
 	@XmlTransient
-	public Stamp getStamp() {
-		return stamp;
+	public StampVO getStamp() {
+		return stampVO;
 	}
 
-	public void setStamp(Stamp stamp) {
-		this.stamp = stamp;
+	public void setStamp(StampVO stampVO) {
+		this.stampVO = stampVO;
 	}
 }

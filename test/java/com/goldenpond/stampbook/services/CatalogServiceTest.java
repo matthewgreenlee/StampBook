@@ -13,14 +13,14 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 import com.goldenpond.stampbook.services.CatalogService;
 
 public class CatalogServiceTest {
 
 	private ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"services.xml", "daos.xml"});
 	private CatalogService manager;
-	private Stamp stamp;
+	private StampVO stampVO;
 
 	private static final Long existingId = Long.valueOf(1);
 	private static final Long nonExistentId = Long.valueOf(-1);
@@ -29,34 +29,34 @@ public class CatalogServiceTest {
 	@Before
 	public void setUp() {
 		manager = ctx.getBean(CatalogService.class);
-		stamp = new Stamp();
-		stamp.setIssueNumber("2012-" + new Random().nextInt(100));
-		stamp.setName("a name");
+		stampVO = new StampVO();
+		stampVO.setIssueNumber("2012-" + new Random().nextInt(100));
+		stampVO.setName("a name");
 	}
 
 	@Test
 	public void testAdd() {
-		manager.add(stamp);
-		assertNotNull(stamp.getId());
+		manager.add(stampVO);
+		assertNotNull(stampVO.getId());
 	}
 
 	@Test(expected = HibernateException.class)
 	public void testAddDuplicateIssueNumber() {
-		stamp.setIssueNumber(existingIssueNumber);
-		manager.add(stamp);
+		stampVO.setIssueNumber(existingIssueNumber);
+		manager.add(stampVO);
 	}
 
 	@Test
 	public void testListAll() {
-		List<Stamp> stamps = manager.listAll();
-		assertNotNull(stamps);
-		assertTrue(stamps.size() > 0);
+		List<StampVO> stampVOs = manager.listAll();
+		assertNotNull(stampVOs);
+		assertTrue(stampVOs.size() > 0);
 	}
 
 	@Test
 	public void testGetExisting() {
-		stamp = manager.get(existingId);
-		assertNotNull(stamp);
+		stampVO = manager.get(existingId);
+		assertNotNull(stampVO);
 	}
 
 	@Test(expected = HibernateException.class)
@@ -66,22 +66,22 @@ public class CatalogServiceTest {
 
 	@Test(expected = HibernateException.class)
 	public void testRemoveCreated() {
-		manager.add(stamp);
-		assertNotNull(stamp.getId());
-		manager.remove(stamp);
-		assertNotNull(stamp.getId());
-		manager.get(stamp.getId());
+		manager.add(stampVO);
+		assertNotNull(stampVO.getId());
+		manager.remove(stampVO);
+		assertNotNull(stampVO.getId());
+		manager.get(stampVO.getId());
 	}
 
 	@Test(expected = HibernateException.class)
 	public void testRemoveNonExistent() {
-		stamp.setId(nonExistentId);
-		manager.remove(stamp);
+		stampVO.setId(nonExistentId);
+		manager.remove(stampVO);
 	}
 
 	@After
 	public void tearDown() {
 		manager = null;
-		stamp = null;
+		stampVO = null;
 	}
 }

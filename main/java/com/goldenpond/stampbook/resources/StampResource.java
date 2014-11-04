@@ -17,7 +17,7 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 import com.goldenpond.stampbook.services.CatalogService;
 import com.sun.jersey.api.NotFoundException;
 
@@ -31,8 +31,8 @@ public class StampResource {
 	@Autowired CatalogService catalogService;
 
 	@GET
-	public Stamp getStamp(@PathParam("stampId") long stampId) {
-		Stamp s = catalogService.get(stampId);
+	public StampVO getStamp(@PathParam("stampId") long stampId) {
+		StampVO s = catalogService.get(stampId);
 		if (s == null) {
 			throw new NotFoundException("Stamp not found");
 		}
@@ -46,7 +46,7 @@ public class StampResource {
 			@FormParam("issueNumber") String issueNumber,
 			@FormParam("name") String name,
 			@FormParam("type") String type) {
-		Stamp s = getStamp(stampId);
+		StampVO s = getStamp(stampId);
 		if (s != null) {
 			if (issueNumber != null) s.setIssueNumber(issueNumber);
 			if (name != null) s.setName(name);
@@ -62,7 +62,7 @@ public class StampResource {
 
 	@DELETE
 	public void deleteStamp(@PathParam("stampId") long stampId) {
-		Stamp s = catalogService.remove(stampId);
+		StampVO s = catalogService.remove(stampId);
 		if (s == null) {
 			throw new NotFoundException("Stamp not found");
 		}

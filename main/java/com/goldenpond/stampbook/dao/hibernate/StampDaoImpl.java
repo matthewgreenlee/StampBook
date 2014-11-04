@@ -14,24 +14,24 @@ import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.dao.StampDao;
 import com.goldenpond.stampbook.pojo.Item;
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 
 @Component
 @Scope("singleton")
 public class StampDaoImpl extends DaoImpl implements StampDao {
 
 	@Override
-	public Stamp create(String issueNumber) {
+	public StampVO create(String issueNumber) {
 
-		Stamp stamp = new Stamp();
-		stamp.setIssueNumber(issueNumber);
-		stamp.setItems(new ArrayList<Item>());
+		StampVO stampVO = new StampVO();
+		stampVO.setIssueNumber(issueNumber);
+		stampVO.setItems(new ArrayList<Item>());
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(stamp);
+			session.persist(stampVO);
 			tx.commit();
 		}
 		catch (HibernateException he) {
@@ -41,13 +41,13 @@ public class StampDaoImpl extends DaoImpl implements StampDao {
 		finally {
 			session.close();
 		}
-		return stamp;
+		return stampVO;
 	}
 
 	@Override
-	public Stamp fetchById(long id) {
+	public StampVO fetchById(long id) {
 
-		Stamp selected = new Stamp();
+		StampVO selected = new StampVO();
 		
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
@@ -72,16 +72,16 @@ public class StampDaoImpl extends DaoImpl implements StampDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Stamp> findAll() {
+	public List<StampVO> findAll() {
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
-		List<Stamp> stamps = null;
+		List<StampVO> stampVOs = null;
 		try {
 			tx = session.beginTransaction();
-			Query q = session.createQuery("from Stamp");	// here "Stamp" is case sensitive
-			stamps = q.list();
-			for (Stamp s : stamps) {
+			Query q = session.createQuery("from StampVO");	// here "Stamp" is case sensitive
+			stampVOs = q.list();
+			for (StampVO s : stampVOs) {
 				Hibernate.initialize(s.getItems());
 			}
 		}
@@ -92,22 +92,22 @@ public class StampDaoImpl extends DaoImpl implements StampDao {
 		finally {
 			session.close();
 		}
-		return stamps;
+		return stampVOs;
 	}
 
 	@Override
-	public Stamp fetchByIssueNumber(String issueNumber) {
+	public StampVO fetchByIssueNumber(String issueNumber) {
 
 		Session session = getSessionFactory().openSession();
 		Transaction tx = null;
-		Stamp stamp = null;
+		StampVO stampVO = null;
 		try {
 			tx = session.beginTransaction();
 			Query q = session.createQuery("from Stamp " +
 					"where ISSUE_NUMBER = :issueNumber"
 					);
 			q.setParameter("issueNumber", issueNumber);
-			stamp = (Stamp) q.uniqueResult();
+			stampVO = (StampVO) q.uniqueResult();
 			tx.commit();
 		}
 		catch (HibernateException he) {
@@ -116,6 +116,6 @@ public class StampDaoImpl extends DaoImpl implements StampDao {
 		finally {
 			session.close();
 		}
-		return stamp;
+		return stampVO;
 	}
 }

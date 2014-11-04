@@ -9,12 +9,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 
 public class StampDaoTest extends TestCase {
 
 	private StampDaoImpl dao = new StampDaoImpl();
-	private Stamp item = new Stamp();
+	private StampVO item = new StampVO();
 	private final long ID = 41;
 
 	@Before
@@ -42,7 +42,7 @@ public class StampDaoTest extends TestCase {
 
 	@Test
 	public void testFetch() {
-		Stamp fetched = dao.fetchById(ID);
+		StampVO fetched = dao.fetchById(ID);
 		assertEquals(ID, fetched.getId());
 		assertEquals("2012-04", fetched.getIssueNumber());
 	}
@@ -63,7 +63,7 @@ public class StampDaoTest extends TestCase {
 
 	@Test
 	public void testFetchByIssueNumber() {
-		Stamp item = dao.fetchByIssueNumber("2012-02");
+		StampVO item = dao.fetchByIssueNumber("2012-02");
 		assertNotNull(item);
 		assertNotNull(item.getId());
 		assertEquals("2012-02", item.getIssueNumber());
@@ -71,8 +71,8 @@ public class StampDaoTest extends TestCase {
 
 	@Test
 	public void testFindAll() {
-		List<Stamp> stamps = dao.findAll();
-		assertEquals(10, stamps.size());
+		List<StampVO> stampVOs = dao.findAll();
+		assertEquals(10, stampVOs.size());
 	}
 
 	@After

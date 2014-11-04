@@ -7,21 +7,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Stamps {
 	// named stamp instead of stamps to bind to <stamp> element for each stamp
-	private List<Stamp> stamp;
+	private List<StampVO> stampVO;
 
 	public Stamps() {
 	}
 
-	public Stamps(List<Stamp> stamp) {
-		this.stamp = stamp;
+	public Stamps(List<StampVO> stampVO) {
+		this.stampVO = stampVO;
 	}
 
-	public List<Stamp> getStamp() {
-		return stamp;
+	public List<StampVO> getStamp() {
+		return stampVO;
 	}
 
-	public void setStamp(List<Stamp> stamp) {
-		this.stamp = stamp;
+	public void setStamp(List<StampVO> stampVO) {
+		this.stampVO = stampVO;
 	}
 
 }

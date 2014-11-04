@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 
 import com.goldenpond.stampbook.dao.hibernate.ItemDaoImpl;
 import com.goldenpond.stampbook.dao.hibernate.StampDaoImpl;
+import com.goldenpond.stampbook.domain.Stamp;
 import com.goldenpond.stampbook.exception.StampBookException;
 import com.goldenpond.stampbook.pojo.Item;
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 import com.goldenpond.stampbook.pojo.Stamps;
 
 @Component
@@ -20,40 +21,45 @@ public class CatalogService {
 	@Autowired(required=true) StampDaoImpl stampDaoImpl;
 	@Autowired(required=true) ItemDaoImpl itemDaoImpl;
 
-	public void add(Stamp stamp) {
-		if (get(stamp.getIssueNumber()) != null) {
+	public void addStamp(StampVO vo) {
+		Stamp s = new Stamp(vo);
+		s.save();
+	}
+
+	public void add(StampVO stampVO) {
+		if (get(stampVO.getIssueNumber()) != null) {
 			throw new StampBookException("IssueNumber already exists");
 		}
 		try {
-			stampDaoImpl.create(stamp);
+			stampDaoImpl.create(stampVO);
 		}
 		catch (Exception e) {
 			throw new StampBookException(e);
 		}
 	}
 
-	public List<Stamp> listAll() {
+	public List<StampVO> listAll() {
 		return stampDaoImpl.findAll();
 	}
 
-	public Stamp get(long stampId) {
+	public StampVO get(long stampId) {
 		return stampDaoImpl.fetchById(stampId);
 	}
 
-	public Stamp get(String issueNumber) {
+	public StampVO get(String issueNumber) {
 		return stampDaoImpl.fetchByIssueNumber(issueNumber);
 	}
 
-	public void modify(Stamp stamp) {
-		stampDaoImpl.update(stamp);
+	public void modify(StampVO stampVO) {
+		stampDaoImpl.update(stampVO);
 	}
 
-	public void remove(Stamp stamp) {
-		stampDaoImpl.delete(stamp);
+	public void remove(StampVO stampVO) {
+		stampDaoImpl.delete(stampVO);
 	}
 
-	public Stamp remove(Long stampId) {
-		Stamp s = get(stampId);
+	public StampVO remove(Long stampId) {
+		StampVO s = get(stampId);
 		if (s == null) return null;
 		stampDaoImpl.delete(s);
 		return s;
@@ -64,7 +70,7 @@ public class CatalogService {
 	}
 
 	public Item getItem(long stampId, String serialNumber) {
-		Stamp s = null;
+		StampVO s = null;
 		try {
 			s = get(stampId);
 		}
@@ -75,7 +81,7 @@ public class CatalogService {
 	}
 
 	public void createItem(long stampId, Item i) {
-		Stamp s = get(stampId);
+		StampVO s = get(stampId);
 		if (s == null) 
 			throw new StampBookException("Stamp not found");
 		if (s.hasItem(i)) {
@@ -87,7 +93,7 @@ public class CatalogService {
 	}
 
 	public void updateItem(long stampId, Item item) {
-		Stamp s = get(stampId);
+		StampVO s = get(stampId);
 		if (s == null) 
 			throw new StampBookException("Stamp not found");
 		if (s.hasItem(item)) {

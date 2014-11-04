@@ -22,7 +22,7 @@
 			<list>
 				<value>com.goldenpond.stampbook.pojo.Collection</value>
 				<value>com.goldenpond.stampbook.pojo.Item</value>
-				<value>com.goldenpond.stampbook.pojo.Stamp</value>
+				<value>com.goldenpond.stampbook.pojo.StampVO</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

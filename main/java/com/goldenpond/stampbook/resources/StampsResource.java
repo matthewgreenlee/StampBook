@@ -14,7 +14,7 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.goldenpond.stampbook.pojo.Stamp;
+import com.goldenpond.stampbook.pojo.StampVO;
 import com.goldenpond.stampbook.pojo.Stamps;
 import com.goldenpond.stampbook.services.CatalogService;
 
@@ -35,15 +35,16 @@ public class StampsResource {
 
 	@POST
 	@Consumes("application/x-www-form-urlencoded")
-	public Stamp postStamp(
+	public StampVO postStamp(
 			@FormParam("issueNumber") String issueNumber,
 			@FormParam("name") String name,
 			@FormParam("type") String type) {
-		Stamp s = new Stamp();
+		StampVO s = new StampVO();
 		s.setIssueNumber(issueNumber);
 		s.setName(name);
 		s.setType(type);
-		catalogService.add(s);
+		// catalogService.add(s);
+		catalogService.addStamp(s);
 		return s;
 	}
 }
